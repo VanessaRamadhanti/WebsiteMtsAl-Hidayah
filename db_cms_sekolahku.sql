@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 22 Okt 2018 pada 08.36
--- Versi Server: 10.1.21-MariaDB
--- PHP Version: 7.1.1
+-- Generation Time: Oct 25, 2018 at 06:07 AM
+-- Server version: 10.1.26-MariaDB
+-- PHP Version: 7.1.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -23,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `academic_years`
+-- Table structure for table `academic_years`
 --
 
 CREATE TABLE `academic_years` (
@@ -45,7 +47,7 @@ CREATE TABLE `academic_years` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `achievements`
+-- Table structure for table `achievements`
 --
 
 CREATE TABLE `achievements` (
@@ -70,7 +72,7 @@ CREATE TABLE `achievements` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `albums`
+-- Table structure for table `albums`
 --
 
 CREATE TABLE `albums` (
@@ -93,7 +95,7 @@ CREATE TABLE `albums` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `answers`
+-- Table structure for table `answers`
 --
 
 CREATE TABLE `answers` (
@@ -114,7 +116,7 @@ CREATE TABLE `answers` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `banners`
+-- Table structure for table `banners`
 --
 
 CREATE TABLE `banners` (
@@ -135,7 +137,7 @@ CREATE TABLE `banners` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `banners`
+-- Dumping data for table `banners`
 --
 
 INSERT INTO `banners` (`id`, `title`, `url`, `target`, `image`, `created_at`, `updated_at`, `deleted_at`, `restored_at`, `created_by`, `updated_by`, `deleted_by`, `restored_by`, `is_deleted`) VALUES
@@ -145,7 +147,7 @@ INSERT INTO `banners` (`id`, `title`, `url`, `target`, `image`, `created_at`, `u
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `class_groups`
+-- Table structure for table `class_groups`
 --
 
 CREATE TABLE `class_groups` (
@@ -167,7 +169,7 @@ CREATE TABLE `class_groups` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `class_group_settings`
+-- Table structure for table `class_group_settings`
 --
 
 CREATE TABLE `class_group_settings` (
@@ -189,7 +191,7 @@ CREATE TABLE `class_group_settings` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `comments`
+-- Table structure for table `comments`
 --
 
 CREATE TABLE `comments` (
@@ -220,7 +222,7 @@ CREATE TABLE `comments` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `employees`
+-- Table structure for table `employees`
 --
 
 CREATE TABLE `employees` (
@@ -285,7 +287,7 @@ CREATE TABLE `employees` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `files`
+-- Table structure for table `files`
 --
 
 CREATE TABLE `files` (
@@ -314,7 +316,7 @@ CREATE TABLE `files` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `file_categories`
+-- Table structure for table `file_categories`
 --
 
 CREATE TABLE `file_categories` (
@@ -334,7 +336,7 @@ CREATE TABLE `file_categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `file_categories`
+-- Dumping data for table `file_categories`
 --
 
 INSERT INTO `file_categories` (`id`, `category`, `slug`, `description`, `created_at`, `updated_at`, `deleted_at`, `restored_at`, `created_by`, `updated_by`, `deleted_by`, `restored_by`, `is_deleted`) VALUES
@@ -343,7 +345,7 @@ INSERT INTO `file_categories` (`id`, `category`, `slug`, `description`, `created
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `image_sliders`
+-- Table structure for table `image_sliders`
 --
 
 CREATE TABLE `image_sliders` (
@@ -362,7 +364,7 @@ CREATE TABLE `image_sliders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `image_sliders`
+-- Dumping data for table `image_sliders`
 --
 
 INSERT INTO `image_sliders` (`id`, `caption`, `image`, `created_at`, `updated_at`, `deleted_at`, `restored_at`, `created_by`, `updated_by`, `deleted_by`, `restored_by`, `is_deleted`) VALUES
@@ -372,7 +374,7 @@ INSERT INTO `image_sliders` (`id`, `caption`, `image`, `created_at`, `updated_at
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `links`
+-- Table structure for table `links`
 --
 
 CREATE TABLE `links` (
@@ -392,7 +394,7 @@ CREATE TABLE `links` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `links`
+-- Dumping data for table `links`
 --
 
 INSERT INTO `links` (`id`, `title`, `url`, `target`, `created_at`, `updated_at`, `deleted_at`, `restored_at`, `created_by`, `updated_by`, `deleted_by`, `restored_by`, `is_deleted`) VALUES
@@ -401,7 +403,7 @@ INSERT INTO `links` (`id`, `title`, `url`, `target`, `created_at`, `updated_at`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `login_attempts`
+-- Table structure for table `login_attempts`
 --
 
 CREATE TABLE `login_attempts` (
@@ -423,7 +425,7 @@ CREATE TABLE `login_attempts` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `majors`
+-- Table structure for table `majors`
 --
 
 CREATE TABLE `majors` (
@@ -444,7 +446,7 @@ CREATE TABLE `majors` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `menus`
+-- Table structure for table `menus`
 --
 
 CREATE TABLE `menus` (
@@ -467,27 +469,28 @@ CREATE TABLE `menus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `menus`
+-- Dumping data for table `menus`
 --
 
 INSERT INTO `menus` (`id`, `menu_title`, `menu_url`, `menu_target`, `menu_type`, `parent_id`, `position`, `created_at`, `updated_at`, `deleted_at`, `restored_at`, `created_by`, `updated_by`, `deleted_by`, `restored_by`, `is_deleted`) VALUES
-(1, 'Hubungi Kami', 'hubungi-kami', '_self', 'modules', 0, 4, '2018-04-02 01:52:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
+(1, 'Hubungi Kami', 'hubungi-kami', '_self', 'modules', 0, 5, '2018-04-02 01:52:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
 (2, 'Gallery Photo', 'gallery-photo', '_self', 'modules', 9, 1, '2018-04-02 01:52:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
 (3, 'Gallery Video', 'gallery-video', '_self', 'modules', 9, 2, '2018-04-02 01:52:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
 (4, 'Formulir PPDB', 'formulir-penerimaan-peserta-didik-baru', '_self', 'modules', 8, 1, '2018-04-02 01:52:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
 (5, 'Hasil Seleksi', 'hasil-seleksi-penerimaan-peserta-didik-baru', '_self', 'modules', 8, 2, '2018-04-02 01:52:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
 (6, 'Cetak Formulir', 'cetak-formulir-penerimaan-peserta-didik-baru', '_self', 'modules', 8, 3, '2018-04-02 01:52:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
 (7, 'Download Formulir', 'download-formulir-penerimaan-peserta-didik-baru', '_self', 'modules', 8, 4, '2018-04-02 01:52:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
-(8, 'PPDB 2017', '#', '_self', 'links', 0, 2, '2018-04-02 01:52:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
-(9, 'Gallery', '#', '_self', 'links', 0, 3, '2018-04-02 01:52:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
-(10, 'Profil Mts Al-Hidayah', '#', '', 'links', 0, 1, '2018-04-02 01:52:04', '2018-10-22 06:16:31', '2018-10-22 06:15:41', '2018-10-22 06:16:31', NULL, 1, 1, 1, 'false'),
+(8, 'PPDB 2017', '#', '_self', 'links', 0, 3, '2018-04-02 01:52:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
+(9, 'Gallery', '#', '_self', 'links', 0, 4, '2018-04-02 01:52:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
+(10, 'Profil Mts Al-Hidayah', '#', '', 'links', 0, 2, '2018-04-02 01:52:04', '2018-10-22 06:16:31', '2018-10-22 06:15:41', '2018-10-22 06:16:31', NULL, 1, 1, 1, 'false'),
 (13, 'Visi dan Misi', 'read/2/visi-dan-misi', '_self', 'pages', 10, 2, '2018-10-22 05:50:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
-(14, 'Sejarah Mts Al-Hidayah', 'category/profil-mts-al-hidayah', '', 'post_categories', 10, 1, '2018-10-22 06:03:20', '2018-10-22 06:17:16', NULL, '2018-10-22 06:17:16', NULL, 1, NULL, 1, 'false');
+(14, 'Sejarah Mts Al-Hidayah', 'category/profil-mts-al-hidayah', '', 'post_categories', 10, 1, '2018-10-22 06:03:20', '2018-10-22 06:17:16', NULL, '2018-10-22 06:17:16', NULL, 1, NULL, 1, 'false'),
+(18, 'Jumlah Guru dan Murid', 'read/10/jumlah-guru-dan-murid', '_self', 'pages', 10, 3, '2018-10-25 04:02:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `modules`
+-- Table structure for table `modules`
 --
 
 CREATE TABLE `modules` (
@@ -508,7 +511,7 @@ CREATE TABLE `modules` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `modules`
+-- Dumping data for table `modules`
 --
 
 INSERT INTO `modules` (`id`, `module_name`, `module_description`, `module_url`, `is_active`, `created_at`, `updated_at`, `deleted_at`, `restored_at`, `created_by`, `updated_by`, `deleted_by`, `restored_by`, `is_deleted`) VALUES
@@ -526,7 +529,7 @@ INSERT INTO `modules` (`id`, `module_name`, `module_description`, `module_url`, 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `options`
+-- Table structure for table `options`
 --
 
 CREATE TABLE `options` (
@@ -545,7 +548,7 @@ CREATE TABLE `options` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `options`
+-- Dumping data for table `options`
 --
 
 INSERT INTO `options` (`id`, `group`, `option`, `created_at`, `updated_at`, `deleted_at`, `restored_at`, `created_by`, `updated_by`, `deleted_by`, `restored_by`, `is_deleted`) VALUES
@@ -722,7 +725,7 @@ INSERT INTO `options` (`id`, `group`, `option`, `created_at`, `updated_at`, `del
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `photos`
+-- Table structure for table `photos`
 --
 
 CREATE TABLE `photos` (
@@ -743,7 +746,7 @@ CREATE TABLE `photos` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pollings`
+-- Table structure for table `pollings`
 --
 
 CREATE TABLE `pollings` (
@@ -764,7 +767,7 @@ CREATE TABLE `pollings` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `posts`
+-- Table structure for table `posts`
 --
 
 CREATE TABLE `posts` (
@@ -793,23 +796,25 @@ CREATE TABLE `posts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `posts`
+-- Dumping data for table `posts`
 --
 
 INSERT INTO `posts` (`id`, `post_title`, `post_content`, `post_image`, `post_author`, `post_categories`, `post_type`, `post_status`, `post_visibility`, `post_comment_status`, `post_slug`, `post_tags`, `post_counter`, `created_at`, `updated_at`, `deleted_at`, `restored_at`, `created_by`, `updated_by`, `deleted_by`, `restored_by`, `is_deleted`) VALUES
 (1, '', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 'headmaster_photo.png', 0, '', 'welcome', 'publish', 'public', 'open', '', '', 0, '2018-04-02 01:52:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
-(2, 'Visi dan Misi', '<p><strong>VISI</strong></p>\n<p>Mewujudkan Sekolah berkualitas Meraih Prestasi Dengan memiliki Kompetensi serta menciptakan manusia berilmu dan&nbsp; berakhlakul karimah.</p>\n<p>&nbsp;<strong>MISI</strong></p>\n<ol>\n<li>Meningkatkan dan menerapkan disiplin seluruh warga sekolah yang terkait dengan menanamkan budaya tertib belajar dan budaya kerja</li>\n<li>Membina peserta didik berlandaskan iman dan ketaqwaan</li>\n<li>Terwujudnya lulusan yang cerdas ,berakhlak mulya dan berbudi pekerti</li>\n<li>Terwujudnya budaya keunggulan dalam prestasi akademik maupun non akademik</li>\n<li>Mengembangkan dan memacu profesionalisme guru dan pegawai guna terwujudnya pendidik dan tenaga pendidikan yang berkualitas</li>\n<li>Terpenuhinya sarana dan prasarana pendidikan sekolah sehingga terwujudnya lingkungan mendukung pembelajaran</li>\n<li>Terlaksananya kurikulum sekolah dan pengembangannya</li>\n<li>Terlaksananya manajemen berbasis sekolah</li>\n<li>Terwujudnya kualitas sistem penilaian sesuai Standar Nasional Pendidikan</li>\n<li>Mengembangkan layanan profesional dalam semangat kerjasama dan keteladanan guna meningkatkan prestasi kerja dan prestasi belajar siswa</li>\n</ol>', NULL, 1, '1', 'page', 'publish', 'public', 'open', 'visi-dan-misi', 'berita, pengumuman, sekilas-info', 9, '2018-04-02 01:52:03', '2018-10-22 05:50:06', NULL, NULL, NULL, 1, NULL, NULL, 'false'),
+(2, 'Visi dan Misi', '<p><strong>VISI</strong></p>\n<p>Mewujudkan Sekolah berkualitas Meraih Prestasi Dengan memiliki Kompetensi serta menciptakan manusia berilmu dan&nbsp; berakhlakul karimah.</p>\n<p>&nbsp;<strong>MISI</strong></p>\n<ol>\n<li>Meningkatkan dan menerapkan disiplin seluruh warga sekolah yang terkait dengan menanamkan budaya tertib belajar dan budaya kerja</li>\n<li>Membina peserta didik berlandaskan iman dan ketaqwaan</li>\n<li>Terwujudnya lulusan yang cerdas ,berakhlak mulya dan berbudi pekerti</li>\n<li>Terwujudnya budaya keunggulan dalam prestasi akademik maupun non akademik</li>\n<li>Mengembangkan dan memacu profesionalisme guru dan pegawai guna terwujudnya pendidik dan tenaga pendidikan yang berkualitas</li>\n<li>Terpenuhinya sarana dan prasarana pendidikan sekolah sehingga terwujudnya lingkungan mendukung pembelajaran</li>\n<li>Terlaksananya kurikulum sekolah dan pengembangannya</li>\n<li>Terlaksananya manajemen berbasis sekolah</li>\n<li>Terwujudnya kualitas sistem penilaian sesuai Standar Nasional Pendidikan</li>\n<li>Mengembangkan layanan profesional dalam semangat kerjasama dan keteladanan guna meningkatkan prestasi kerja dan prestasi belajar siswa</li>\n</ol>', NULL, 1, '1', 'page', 'publish', 'public', 'open', 'visi-dan-misi', 'berita, pengumuman, sekilas-info', 10, '2018-04-02 01:52:03', '2018-10-22 05:50:06', NULL, NULL, NULL, 1, NULL, NULL, 'false'),
 (3, 'Sejarah Mts Al-Hidayah', '<p>Madrasah Tsanawiyah (Mts) Al Hidayah berdiri dibawah naungan Yayasan Pendidikan dan Perguruan Islam (YPPI) Al Hidayah, didirikan sebagai alternatif jawaban atas persoalan pendidikan yang berkembang di masyarakat. Masyarakat selama ini selalu dihadapkan dengan dua pilihan dalam pendidikan; pertama, jika masyarakat memilih pendidikan yang berbasis religi (agama) saja maka konskwensi yang diterima adalah kekurang mampuan lulusan tersebut dibidang sains (ilmu pengetahuan umum) padahal keilmuan ini sangat dibutuhkan untuk mengembangkan kehidupan yang lebih baik dan layak. Kedua, jika masyarak memilih pendidikan yang berbasis sains (ilmu pengetahuan umum), maka konsekuensi yang diterima adalah kekurangmampuan lulusan pendidikan tersebut dalam bidang religi (agama), padahal ilmuan agama sangat dibutuhkan sebagai pengendali hidup di dunia maupun di akhirat.</p>\n<p>MTs Al Hidayah berawal dari Madrasah Ibtidaiyah didirikan oleh masyarakat pada tahun 1980, pada tahun 1988 menjadi MTs Al Hidayah dan berhak menyelenggarakan pendidikan dan pengajaran, serta mengikuti Ujian Akhir Negara. Pada tanggal 1 Juni 1988 resmi menjadi MTs Al Hidayah dengan SK Kepala Kandepag Provinsi Lampung no: Wh/PP.00.5/1321/1999 Tanggal 2 September 1999, dan telah diperpanjang dengan nomor : KW.08.2/hk.00.8/331/2016 tanggal 4 November 2016 dan Keputusan Mentri Hukum Dan Hak Asasi Manusia Republik Indonesia Nomor: AHU-0033034.AH.01.04 Tahun 2016.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>\n<p>Kepala sekolah di MTs Al Hidayah sejak tahun 1989 sampai sekarang telah berganti sebanyak 5 kali adapun nama-nama kepala sekolah sebagai berikut: pertama, Drs. Samsul Ma&rsquo;arif menjadi kepala sekolah sejak tahun 1989 sampai dengan tahun 1995; kedua, Drs. Muhdar Nur K menjadi kepala sekolah sejak tahun 1995 sampai dengan 1999; ketiga, Haris Subardi menjadi kepala sekolah sejak tahun 1999 sampai dengan 2002; keempat, Dra. Listiati menjadi kepala sekolah dari tahun 2002 sampai dengan tahun 2007; kelima, Nurhayati,S.Pd. menjadi kepala sekolah sejak tahun 2007 sampai dengan sekarang.&nbsp;&nbsp;&nbsp;&nbsp;</p>', '09d683cba62e68e53760bd057afcb80b.jpg', 1, '2', 'post', 'publish', 'public', 'open', 'sejarah-mts-al-hidayah', 'berita, pengumuman, sekilas-info', 10, '2018-04-02 01:52:03', '2018-10-22 06:01:15', NULL, NULL, NULL, 1, NULL, NULL, 'false'),
 (4, 'Sample Post 2', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 'post_image.png', 1, '1', 'post', 'publish', 'public', 'open', 'sample-post-2', 'berita, pengumuman, sekilas-info', 1, '2018-04-02 01:52:03', NULL, '2018-10-22 05:07:46', NULL, NULL, NULL, 1, NULL, 'true'),
 (5, 'Sample Post 3', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 'post_image.png', 1, '1', 'post', 'publish', 'public', 'open', 'sample-post-3', 'berita, pengumuman, sekilas-info', 1, '2018-04-02 01:52:03', NULL, '2018-10-22 05:07:46', NULL, NULL, NULL, 1, NULL, 'true'),
 (6, 'Sample Post 4', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 'post_image.png', 1, '1', 'post', 'publish', 'public', 'open', 'sample-post-4', 'berita, pengumuman, sekilas-info', 1, '2018-04-02 01:52:03', NULL, '2018-10-22 05:07:46', NULL, NULL, NULL, 1, NULL, 'true'),
 (7, 'Sample Post 5', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 'post_image.png', 1, '1', 'post', 'publish', 'public', 'open', 'sample-post-5', 'berita, pengumuman, sekilas-info', 1, '2018-04-02 01:52:03', NULL, '2018-10-22 05:07:46', NULL, NULL, NULL, 1, NULL, 'true'),
-(8, 'Visi dan Misi', '<p><strong>VISI</strong></p>\n<p>Mewujudkan Sekolah berkualitas Meraih Prestasi Dengan memiliki Kompetensi serta menciptakan manusia berilmu dan&nbsp; berakhlakul karimah.</p>\n<p>&nbsp;<strong>MISI</strong></p>\n<ol>\n<li>Meningkatkan dan menerapkan disiplin seluruh warga sekolah yang terkait dengan menanamkan budaya tertib belajar dan budaya kerja</li>\n<li>Membina peserta didik berlandaskan iman dan ketaqwaan</li>\n<li>Terwujudnya lulusan yang cerdas ,berakhlak mulya dan berbudi pekerti</li>\n<li>Terwujudnya budaya keunggulan dalam prestasi akademik maupun non akademik</li>\n<li>Mengembangkan dan memacu profesionalisme guru dan pegawai guna terwujudnya pendidik dan tenaga pendidikan yang berkualitas</li>\n<li>Terpenuhinya sarana dan prasarana pendidikan sekolah sehingga terwujudnya lingkungan mendukung pembelajaran</li>\n<li>Terlaksananya kurikulum sekolah dan pengembangannya</li>\n<li>Terlaksananya manajemen berbasis sekolah</li>\n<li>Terwujudnya kualitas sistem penilaian sesuai Standar Nasional Pendidikan</li>\n<li>Mengembangkan layanan profesional dalam semangat kerjasama dan keteladanan guna meningkatkan prestasi kerja dan prestasi belajar siswa</li>\n</ol>', NULL, 1, '', 'post', 'publish', 'public', 'open', 'visi-dan-misi', '', 0, '2018-10-22 05:45:24', '2018-10-22 06:06:49', '2018-10-22 06:11:11', '2018-10-22 06:07:18', 1, 1, 1, 1, 'true');
+(8, 'Visi dan Misi', '<p><strong>VISI</strong></p>\n<p>Mewujudkan Sekolah berkualitas Meraih Prestasi Dengan memiliki Kompetensi serta menciptakan manusia berilmu dan&nbsp; berakhlakul karimah.</p>\n<p>&nbsp;<strong>MISI</strong></p>\n<ol>\n<li>Meningkatkan dan menerapkan disiplin seluruh warga sekolah yang terkait dengan menanamkan budaya tertib belajar dan budaya kerja</li>\n<li>Membina peserta didik berlandaskan iman dan ketaqwaan</li>\n<li>Terwujudnya lulusan yang cerdas ,berakhlak mulya dan berbudi pekerti</li>\n<li>Terwujudnya budaya keunggulan dalam prestasi akademik maupun non akademik</li>\n<li>Mengembangkan dan memacu profesionalisme guru dan pegawai guna terwujudnya pendidik dan tenaga pendidikan yang berkualitas</li>\n<li>Terpenuhinya sarana dan prasarana pendidikan sekolah sehingga terwujudnya lingkungan mendukung pembelajaran</li>\n<li>Terlaksananya kurikulum sekolah dan pengembangannya</li>\n<li>Terlaksananya manajemen berbasis sekolah</li>\n<li>Terwujudnya kualitas sistem penilaian sesuai Standar Nasional Pendidikan</li>\n<li>Mengembangkan layanan profesional dalam semangat kerjasama dan keteladanan guna meningkatkan prestasi kerja dan prestasi belajar siswa</li>\n</ol>', NULL, 1, '', 'post', 'publish', 'public', 'open', 'visi-dan-misi', '', 0, '2018-10-22 05:45:24', '2018-10-22 06:06:49', '2018-10-22 06:11:11', '2018-10-22 06:07:18', 1, 1, 1, 1, 'true'),
+(9, 'Informasi Sekolah', '<p>fjasuk</p>', NULL, 1, NULL, 'page', 'publish', 'public', 'open', 'informasi-sekolah', NULL, 4, '2018-10-25 03:46:53', NULL, '2018-10-25 03:54:50', NULL, 1, NULL, 1, NULL, 'true'),
+(10, 'Jumlah Guru dan Murid', '<p>Ketenagaan yang ada di MTs Al Hidayah Sukajaya terdiri dari :</p>\n<ol>\n<li>Kepala sekolah&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 1 Orang</li>\n<li>Guru PNS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 1 Orang</li>\n<li>Tenaga Administrasi : 0 Orang</li>\n<li>Honorer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 9 Orang</li>\n<li>Penjaga Sekolah&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <u>: 1 Orang</u></li>\n</ol>\n<p>Jumlah &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; 13 Orang</p>\n<p>&nbsp;</p>\n<p>Siswa MTs Al-Hidayah berjumlah 68 orang terdiri dari :</p>\n<p>Kelas VII&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 17 orang</p>\n<p>Kelas VIII&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 23 orang</p>\n<p>Kelas IX &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 28 orang</p>', NULL, 1, NULL, 'page', 'publish', 'public', 'open', 'jumlah-guru-dan-murid', NULL, 3, '2018-10-25 04:01:55', NULL, NULL, NULL, 1, NULL, NULL, NULL, 'false');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `post_categories`
+-- Table structure for table `post_categories`
 --
 
 CREATE TABLE `post_categories` (
@@ -829,7 +834,7 @@ CREATE TABLE `post_categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `post_categories`
+-- Dumping data for table `post_categories`
 --
 
 INSERT INTO `post_categories` (`id`, `category`, `slug`, `description`, `created_at`, `updated_at`, `deleted_at`, `restored_at`, `created_by`, `updated_by`, `deleted_by`, `restored_by`, `is_deleted`) VALUES
@@ -839,7 +844,7 @@ INSERT INTO `post_categories` (`id`, `category`, `slug`, `description`, `created
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `questions`
+-- Table structure for table `questions`
 --
 
 CREATE TABLE `questions` (
@@ -860,7 +865,7 @@ CREATE TABLE `questions` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `quotes`
+-- Table structure for table `quotes`
 --
 
 CREATE TABLE `quotes` (
@@ -881,7 +886,7 @@ CREATE TABLE `quotes` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `registration_phases`
+-- Table structure for table `registration_phases`
 --
 
 CREATE TABLE `registration_phases` (
@@ -902,7 +907,7 @@ CREATE TABLE `registration_phases` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `registration_phases`
+-- Dumping data for table `registration_phases`
 --
 
 INSERT INTO `registration_phases` (`id`, `year`, `phase`, `start_date`, `end_date`, `created_at`, `updated_at`, `deleted_at`, `restored_at`, `created_by`, `updated_by`, `deleted_by`, `restored_by`, `is_deleted`) VALUES
@@ -911,7 +916,7 @@ INSERT INTO `registration_phases` (`id`, `year`, `phase`, `start_date`, `end_dat
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `registration_quotas`
+-- Table structure for table `registration_quotas`
 --
 
 CREATE TABLE `registration_quotas` (
@@ -933,7 +938,7 @@ CREATE TABLE `registration_quotas` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `scholarships`
+-- Table structure for table `scholarships`
 --
 
 CREATE TABLE `scholarships` (
@@ -957,7 +962,7 @@ CREATE TABLE `scholarships` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `settings`
+-- Table structure for table `settings`
 --
 
 CREATE TABLE `settings` (
@@ -980,7 +985,7 @@ CREATE TABLE `settings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `settings`
+-- Dumping data for table `settings`
 --
 
 INSERT INTO `settings` (`id`, `group`, `variable`, `value`, `default`, `group_access`, `description`, `created_at`, `updated_at`, `deleted_at`, `restored_at`, `created_by`, `updated_by`, `deleted_by`, `restored_by`, `is_deleted`) VALUES
@@ -1082,7 +1087,7 @@ INSERT INTO `settings` (`id`, `group`, `variable`, `value`, `default`, `group_ac
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `students`
+-- Table structure for table `students`
 --
 
 CREATE TABLE `students` (
@@ -1176,7 +1181,7 @@ CREATE TABLE `students` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `subscribers`
+-- Table structure for table `subscribers`
 --
 
 CREATE TABLE `subscribers` (
@@ -1197,7 +1202,7 @@ CREATE TABLE `subscribers` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tags`
+-- Table structure for table `tags`
 --
 
 CREATE TABLE `tags` (
@@ -1216,7 +1221,7 @@ CREATE TABLE `tags` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `tags`
+-- Dumping data for table `tags`
 --
 
 INSERT INTO `tags` (`id`, `tag`, `slug`, `created_at`, `updated_at`, `deleted_at`, `restored_at`, `created_by`, `updated_by`, `deleted_by`, `restored_by`, `is_deleted`) VALUES
@@ -1228,7 +1233,7 @@ INSERT INTO `tags` (`id`, `tag`, `slug`, `created_at`, `updated_at`, `deleted_at
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `themes`
+-- Table structure for table `themes`
 --
 
 CREATE TABLE `themes` (
@@ -1249,7 +1254,7 @@ CREATE TABLE `themes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `themes`
+-- Dumping data for table `themes`
 --
 
 INSERT INTO `themes` (`id`, `theme_name`, `theme_folder`, `theme_author`, `is_active`, `created_at`, `updated_at`, `deleted_at`, `restored_at`, `created_by`, `updated_by`, `deleted_by`, `restored_by`, `is_deleted`) VALUES
@@ -1261,7 +1266,7 @@ INSERT INTO `themes` (`id`, `theme_name`, `theme_folder`, `theme_author`, `is_ac
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -1294,16 +1299,16 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `user_name`, `user_password`, `user_full_name`, `user_email`, `user_url`, `biography`, `user_registered`, `user_group_id`, `user_type`, `profile_id`, `forgot_password_key`, `forgot_password_request_date`, `is_active`, `is_logged_in`, `last_logged_in`, `ip_address`, `created_at`, `updated_at`, `deleted_at`, `restored_at`, `created_by`, `updated_by`, `deleted_by`, `restored_by`, `is_deleted`) VALUES
-(1, 'Admin', '$2y$10$YaZadpEE8yiHVoWEz//Z1uxUGWGRLyOCb87mhdU8Hcn1EOzrQgZiO', 'Admin', 'admin@mail.com', NULL, NULL, '2018-10-09 20:45:31', 0, 'super_user', NULL, NULL, NULL, 'true', 'true', '2018-10-22 10:33:32', '::1', '2018-10-09 13:45:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false');
+(1, 'Admin', '$2y$10$YaZadpEE8yiHVoWEz//Z1uxUGWGRLyOCb87mhdU8Hcn1EOzrQgZiO', 'Admin', 'admin@mail.com', NULL, NULL, '2018-10-09 20:45:31', 0, 'super_user', NULL, NULL, NULL, 'true', 'true', '2018-10-25 10:38:07', '::1', '2018-10-09 13:45:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user_groups`
+-- Table structure for table `user_groups`
 --
 
 CREATE TABLE `user_groups` (
@@ -1323,7 +1328,7 @@ CREATE TABLE `user_groups` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user_privileges`
+-- Table structure for table `user_privileges`
 --
 
 CREATE TABLE `user_privileges` (
@@ -1344,7 +1349,7 @@ CREATE TABLE `user_privileges` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `_sessions`
+-- Table structure for table `_sessions`
 --
 
 CREATE TABLE `_sessions` (
@@ -1355,14 +1360,11 @@ CREATE TABLE `_sessions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `_sessions`
+-- Dumping data for table `_sessions`
 --
 
 INSERT INTO `_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
-('civph5r8urmgnkb30hhdgnkr9nfu57p9', '::1', 1540178378, 0x5f5f63695f6c6173745f726567656e65726174657c693a313534303137383337333b736974655f6d61696e74656e616e63657c733a353a2266616c7365223b736974655f6d61696e74656e616e63655f656e645f646174657c733a31303a22323031372d30312d3031223b736974655f63616368657c733a353a2266616c7365223b736974655f63616368655f74696d657c733a323a223130223b6d6574615f6465736372697074696f6e7c733a3130363a22434d532053656b6f6c61686b75206164616c616820436f6e74656e74204d616e6167656d656e742053797374656d2064616e2050504442204f6e6c696e652067726174697320756e74756b20534420534d502f5365646572616a617420534d412f5365646572616a6174223b6d6574615f6b6579776f7264737c733a3338313a22434d532c20576562736974652053656b6f6c6168204772617469732c2043617261204d656d6275617420576562736974652053656b6f6c61682c206d656d62756174207765622073656b6f6c61682c20636f6e746f6820776562736974652073656b6f6c61682c20666974757220776562736974652073656b6f6c61682c2053656b6f6c61682c20576562736974652c20496e7465726e65742c53697475732c20434d532053656b6f6c61682c205765622053656b6f6c61682c20576562736974652053656b6f6c6168204772617469732c20576562736974652053656b6f6c61682c2041706c696b6173692053656b6f6c61682c2050504442204f6e6c696e652c20505342204f6e6c696e652c20505342204f6e6c696e65204772617469732c2050656e6572696d61616e2053697377612042617275204f6e6c696e652c205261706f7274204f6e6c696e652c204b7572696b756c756d20323031332c2053442c20534d502c20534d412c20416c697961682c204d54732c20534d4b223b676f6f676c655f6d61705f6170695f6b65797c733a33393a2241497a615379446d69796346787a595a3337464f774134777153624c337a325976495949417277223b6c617469747564657c733a31303a222d362e32343037333131223b6c6f6e6769747564657c733a31313a223130362e39393732383932223b66617669636f6e7c733a31313a2266617669636f6e2e706e67223b6865616465727c733a31303a226865616465722e706e67223b7265636170746368615f736974655f6b65797c733a34303a22364c654e435441554141414141414454624c317244773847543144463244556a567445587a644d75223b74696d657a6f6e657c733a31323a22417369612f4a616b61727461223b66696c655f616c6c6f7765645f74797065737c733a31393a226a70672c206a7065672c20706e672c20676966223b75706c6f61645f6d61785f66696c6573697a657c733a313a2230223b73747564656e745f70686f746f5f6865696768747c733a333a22313730223b73747564656e745f70686f746f5f77696474687c733a333a22313133223b706f73745f7065725f706167657c733a323a223130223b706f73745f7273735f636f756e747c733a323a223130223b706f73745f72656c617465645f636f756e747c733a323a223130223b636f6d6d656e745f7065725f706167657c733a323a223130223b636f6d6d656e745f726567697374726174696f6e7c733a353a2266616c7365223b636f6d6d656e745f626c61636b6c6973747c733a373a226b616d70726574223b636f6d6d656e745f6f726465727c733a333a22617363223b66616365626f6f6b7c733a303a22223b747769747465727c733a303a22223b676f6f676c655f706c75737c733a303a22223b6c696e6b65645f696e7c733a303a22223b796f75747562657c733a303a22223b696e7374616772616d7c733a303a22223b6e70736e7c733a333a22313233223b7363686f6f6c5f6e616d657c733a31343a224d747320416c2d48696461796168223b686561646d61737465727c733a31323a22416e746f6e20536f6679616e223b686561646d61737465725f70686f746f7c733a32303a22686561646d61737465725f70686f746f2e706e67223b7363686f6f6c5f6c6576656c7c733a313a2232223b7363686f6f6c5f7374617475737c733a313a2231223b7461676c696e657c733a303a22223b72747c733a323a223132223b72777c733a323a223036223b7375625f76696c6c6167657c733a343a2257616765223b76696c6c6167657c733a383a224b61647567656465223b7375625f64697374726963747c733a383a224b61647567656465223b64697374726963747c733a31393a224b6f74612042616e646172204c616d70756e67223b706f7374616c5f636f64657c733a353a223435353631223b7374726565745f616464726573737c733a37373a224a6c2e204e61776177692047656c61722044616c6f6d2c2052616a6162617361204a6179612c2052616a61626173612c204b6f74612042616e646172204c616d70756e672c204c616d70756e67223b70686f6e657c733a31303a2230323332313233343536223b6661787c733a31303a2230323332313233343536223b656d61696c7c733a32353a22696e666f40736d616e396b756e696e67616e2e7363682e6964223b776562736974657c733a33313a22687474703a2f2f7777772e736d616e396b756e696e67616e2e7363682e6964223b6c6f676f7c733a383a226c6f676f2e706e67223b61646d697373696f6e5f7374617475737c733a343a226f70656e223b61646d697373696f6e5f796561727c733a343a2232303138223b61646d697373696f6e5f73746172745f646174657c733a31303a22323031382d31302d3138223b61646d697373696f6e5f656e645f646174657c733a31303a22323031382d31302d3237223b616e6e6f756e63656d656e745f73746172745f646174657c733a31303a22323031372d30312d3031223b616e6e6f756e63656d656e745f656e645f646174657c733a31303a22323031372d31322d3331223b61646d697373696f6e5f70686173655f69647c733a313a2231223b61646d697373696f6e5f70686173657c733a313a2231223b7468656d657c733a353a22636f736d6f223b),
-('bh24d5905c8ddk3obbtm8bj29s14gqbr', '::1', 1540179206, 0x5f5f63695f6c6173745f726567656e65726174657c693a313534303137393230363b736974655f6d61696e74656e616e63657c733a353a2266616c7365223b736974655f6d61696e74656e616e63655f656e645f646174657c733a31303a22323031372d30312d3031223b736974655f63616368657c733a353a2266616c7365223b736974655f63616368655f74696d657c733a323a223130223b6d6574615f6465736372697074696f6e7c733a3130363a22434d532053656b6f6c61686b75206164616c616820436f6e74656e74204d616e6167656d656e742053797374656d2064616e2050504442204f6e6c696e652067726174697320756e74756b20534420534d502f5365646572616a617420534d412f5365646572616a6174223b6d6574615f6b6579776f7264737c733a3338313a22434d532c20576562736974652053656b6f6c6168204772617469732c2043617261204d656d6275617420576562736974652053656b6f6c61682c206d656d62756174207765622073656b6f6c61682c20636f6e746f6820776562736974652073656b6f6c61682c20666974757220776562736974652073656b6f6c61682c2053656b6f6c61682c20576562736974652c20496e7465726e65742c53697475732c20434d532053656b6f6c61682c205765622053656b6f6c61682c20576562736974652053656b6f6c6168204772617469732c20576562736974652053656b6f6c61682c2041706c696b6173692053656b6f6c61682c2050504442204f6e6c696e652c20505342204f6e6c696e652c20505342204f6e6c696e65204772617469732c2050656e6572696d61616e2053697377612042617275204f6e6c696e652c205261706f7274204f6e6c696e652c204b7572696b756c756d20323031332c2053442c20534d502c20534d412c20416c697961682c204d54732c20534d4b223b676f6f676c655f6d61705f6170695f6b65797c733a33393a2241497a615379446d69796346787a595a3337464f774134777153624c337a325976495949417277223b6c617469747564657c733a31303a222d362e32343037333131223b6c6f6e6769747564657c733a31313a223130362e39393732383932223b66617669636f6e7c733a31313a2266617669636f6e2e706e67223b6865616465727c733a31303a226865616465722e706e67223b7265636170746368615f736974655f6b65797c733a34303a22364c654e435441554141414141414454624c317244773847543144463244556a567445587a644d75223b74696d657a6f6e657c733a31323a22417369612f4a616b61727461223b66696c655f616c6c6f7765645f74797065737c733a31393a226a70672c206a7065672c20706e672c20676966223b75706c6f61645f6d61785f66696c6573697a657c733a313a2230223b73747564656e745f70686f746f5f6865696768747c733a333a22313730223b73747564656e745f70686f746f5f77696474687c733a333a22313133223b706f73745f7065725f706167657c733a323a223130223b706f73745f7273735f636f756e747c733a323a223130223b706f73745f72656c617465645f636f756e747c733a323a223130223b636f6d6d656e745f7065725f706167657c733a323a223130223b636f6d6d656e745f726567697374726174696f6e7c733a353a2266616c7365223b636f6d6d656e745f626c61636b6c6973747c733a373a226b616d70726574223b636f6d6d656e745f6f726465727c733a333a22617363223b66616365626f6f6b7c733a303a22223b747769747465727c733a303a22223b676f6f676c655f706c75737c733a303a22223b6c696e6b65645f696e7c733a303a22223b796f75747562657c733a303a22223b696e7374616772616d7c733a303a22223b6e70736e7c733a333a22313233223b7363686f6f6c5f6e616d657c733a31343a224d747320416c2d48696461796168223b686561646d61737465727c733a31323a22416e746f6e20536f6679616e223b686561646d61737465725f70686f746f7c733a32303a22686561646d61737465725f70686f746f2e706e67223b7363686f6f6c5f6c6576656c7c733a313a2232223b7363686f6f6c5f7374617475737c733a313a2231223b7461676c696e657c733a303a22223b72747c733a323a223132223b72777c733a323a223036223b7375625f76696c6c6167657c733a343a2257616765223b76696c6c6167657c733a383a224b61647567656465223b7375625f64697374726963747c733a383a224b61647567656465223b64697374726963747c733a31393a224b6f74612042616e646172204c616d70756e67223b706f7374616c5f636f64657c733a353a223435353631223b7374726565745f616464726573737c733a37373a224a6c2e204e61776177692047656c61722044616c6f6d2c2052616a6162617361204a6179612c2052616a61626173612c204b6f74612042616e646172204c616d70756e672c204c616d70756e67223b70686f6e657c733a31303a2230323332313233343536223b6661787c733a31303a2230323332313233343536223b656d61696c7c733a32353a22696e666f40736d616e396b756e696e67616e2e7363682e6964223b776562736974657c733a33313a22687474703a2f2f7777772e736d616e396b756e696e67616e2e7363682e6964223b6c6f676f7c733a383a226c6f676f2e706e67223b61646d697373696f6e5f7374617475737c733a343a226f70656e223b61646d697373696f6e5f796561727c733a343a2232303138223b61646d697373696f6e5f73746172745f646174657c733a31303a22323031382d31302d3138223b61646d697373696f6e5f656e645f646174657c733a31303a22323031382d31302d3237223b616e6e6f756e63656d656e745f73746172745f646174657c733a31303a22323031372d30312d3031223b616e6e6f756e63656d656e745f656e645f646174657c733a31303a22323031372d31322d3331223b61646d697373696f6e5f70686173655f69647c733a313a2231223b61646d697373696f6e5f70686173657c733a313a2231223b7468656d657c733a353a22636f736d6f223b69647c733a313a2231223b757365725f6e616d657c733a353a2241646d696e223b757365725f66756c6c5f6e616d657c733a353a2241646d696e223b757365725f656d61696c7c733a31343a2261646d696e406d61696c2e636f6d223b757365725f75726c7c4e3b757365725f726567697374657265647c733a31393a22323031382d31302d30392032303a34353a3331223b757365725f67726f75705f69647c733a313a2230223b757365725f747970657c733a31303a2273757065725f75736572223b70726f66696c655f69647c4e3b69735f6c6f676765645f696e7c623a313b757365725f70726976696c656765737c613a31343a7b693a303b733a393a2264617368626f617264223b693a313b733a31353a226368616e67655f70617373776f7264223b693a323b733a31313a226d61696e74656e616e6365223b693a333b733a333a2261636c223b693a343b733a393a2261646d697373696f6e223b693a353b733a31303a22617070656172616e6365223b693a363b733a343a22626c6f67223b693a373b733a393a22656d706c6f79656573223b693a383b733a353a226d65646961223b693a393b733a373a22706c7567696e73223b693a31303b733a393a227265666572656e6365223b693a31313b733a383a2273657474696e6773223b693a31323b733a383a2273747564656e7473223b693a31333b733a373a2270726f66696c65223b7d7468756d626e61696c5f73697a655f6865696768747c733a333a22313030223b7468756d626e61696c5f73697a655f77696474687c733a333a22313530223b6d656469756d5f73697a655f6865696768747c733a333a22333038223b6d656469756d5f73697a655f77696474687c733a333a22343630223b6c617267655f73697a655f6865696768747c733a333a22363030223b6c617267655f73697a655f77696474687c733a333a22383030223b616c62756d5f636f7665725f6865696768747c733a333a22323530223b616c62756d5f636f7665725f77696474687c733a333a22343030223b62616e6e65725f6865696768747c733a323a223831223b62616e6e65725f77696474687c733a333a22323435223b696d6167655f736c696465725f6865696768747c733a333a22343030223b696d6167655f736c696465725f77696474687c733a333a22393030223b656d706c6f7965655f70686f746f5f6865696768747c733a333a22313730223b656d706c6f7965655f70686f746f5f77696474687c733a333a22313133223b686561646d61737465725f70686f746f5f6865696768747c733a333a22313730223b686561646d61737465725f70686f746f5f77696474687c733a333a22313133223b6865616465725f6865696768747c733a323a223830223b6865616465725f77696474687c733a333a22323030223b6c6f676f5f6865696768747c733a333a22313230223b6c6f676f5f77696474687c733a333a22313230223b64656661756c745f706f73745f63617465676f72797c733a313a2231223b64656661756c745f706f73745f7374617475737c733a373a227075626c697368223b64656661756c745f706f73745f7669736962696c6974797c733a363a227075626c6963223b64656661756c745f706f73745f64697363757373696f6e7c733a343a226f70656e223b706f73745f696d6167655f7468756d626e61696c5f6865696768747c733a333a22313030223b706f73745f696d6167655f7468756d626e61696c5f77696474687c733a333a22313530223b706f73745f696d6167655f6d656469756d5f6865696768747c733a333a22323530223b706f73745f696d6167655f6d656469756d5f77696474687c733a333a22343030223b706f73745f696d6167655f6c617267655f6865696768747c733a333a22343530223b706f73745f696d6167655f6c617267655f77696474687c733a333a22383430223b636f6d6d656e745f6d6f6465726174696f6e7c733a353a2266616c7365223b73656e64677269645f757365726e616d657c733a303a22223b73656e64677269645f70617373776f72647c733a303a22223b73656e64677269645f6170695f6b65797c733a36393a2253472e7337614c476977725464695a6c4146724a4f425939512e6370676d765a5833625250377649786f71775553764d6c38733132394d41467a43794458694c77616e7373223b6f776e6572736869705f7374617475737c733a313a2231223b6465637265655f6f7065726174696e675f7065726d69747c733a313a222d223b6465637265655f6f7065726174696e675f7065726d69745f646174657c733a31303a22323031382d30342d3032223b6b6579776f72647c733a373a2273656a61726168223b736964656261725f636f6c6c617073657c623a303b),
-('fdh6ump43bfu8jglhdk4oivh92rujr83', '::1', 1540187970, 0x5f5f63695f6c6173745f726567656e65726174657c693a313534303138373937303b736974655f6d61696e74656e616e63657c733a353a2266616c7365223b736974655f6d61696e74656e616e63655f656e645f646174657c733a31303a22323031372d30312d3031223b736974655f63616368657c733a353a2266616c7365223b736974655f63616368655f74696d657c733a323a223130223b6d6574615f6465736372697074696f6e7c733a3130363a22434d532053656b6f6c61686b75206164616c616820436f6e74656e74204d616e6167656d656e742053797374656d2064616e2050504442204f6e6c696e652067726174697320756e74756b20534420534d502f5365646572616a617420534d412f5365646572616a6174223b6d6574615f6b6579776f7264737c733a3338313a22434d532c20576562736974652053656b6f6c6168204772617469732c2043617261204d656d6275617420576562736974652053656b6f6c61682c206d656d62756174207765622073656b6f6c61682c20636f6e746f6820776562736974652073656b6f6c61682c20666974757220776562736974652073656b6f6c61682c2053656b6f6c61682c20576562736974652c20496e7465726e65742c53697475732c20434d532053656b6f6c61682c205765622053656b6f6c61682c20576562736974652053656b6f6c6168204772617469732c20576562736974652053656b6f6c61682c2041706c696b6173692053656b6f6c61682c2050504442204f6e6c696e652c20505342204f6e6c696e652c20505342204f6e6c696e65204772617469732c2050656e6572696d61616e2053697377612042617275204f6e6c696e652c205261706f7274204f6e6c696e652c204b7572696b756c756d20323031332c2053442c20534d502c20534d412c20416c697961682c204d54732c20534d4b223b676f6f676c655f6d61705f6170695f6b65797c733a33393a2241497a615379446d69796346787a595a3337464f774134777153624c337a325976495949417277223b6c617469747564657c733a31303a222d362e32343037333131223b6c6f6e6769747564657c733a31313a223130362e39393732383932223b66617669636f6e7c733a31313a2266617669636f6e2e706e67223b6865616465727c733a33363a2230623064313066393834663536613664313937376334666639383963353938382e706e67223b7265636170746368615f736974655f6b65797c733a34303a22364c654e435441554141414141414454624c317244773847543144463244556a567445587a644d75223b74696d657a6f6e657c733a31323a22417369612f4a616b61727461223b66696c655f616c6c6f7765645f74797065737c733a31393a226a70672c206a7065672c20706e672c20676966223b75706c6f61645f6d61785f66696c6573697a657c733a313a2230223b73747564656e745f70686f746f5f6865696768747c733a333a22313730223b73747564656e745f70686f746f5f77696474687c733a333a22313133223b706f73745f7065725f706167657c733a323a223130223b706f73745f7273735f636f756e747c733a323a223130223b706f73745f72656c617465645f636f756e747c733a323a223130223b636f6d6d656e745f7065725f706167657c733a323a223130223b636f6d6d656e745f726567697374726174696f6e7c733a353a2266616c7365223b636f6d6d656e745f626c61636b6c6973747c733a373a226b616d70726574223b636f6d6d656e745f6f726465727c733a333a22617363223b66616365626f6f6b7c733a303a22223b747769747465727c733a303a22223b676f6f676c655f706c75737c733a303a22223b6c696e6b65645f696e7c733a303a22223b796f75747562657c733a303a22223b696e7374616772616d7c733a303a22223b6e70736e7c733a333a22313233223b7363686f6f6c5f6e616d657c733a31343a224d747320416c2d48696461796168223b686561646d61737465727c733a31323a22416e746f6e20536f6679616e223b686561646d61737465725f70686f746f7c733a32303a22686561646d61737465725f70686f746f2e706e67223b7363686f6f6c5f6c6576656c7c733a313a2232223b7363686f6f6c5f7374617475737c733a313a2231223b7461676c696e657c733a303a22223b72747c733a323a223132223b72777c733a323a223036223b7375625f76696c6c6167657c733a343a2257616765223b76696c6c6167657c733a383a224b61647567656465223b7375625f64697374726963747c733a383a224b61647567656465223b64697374726963747c733a31393a224b6f74612042616e646172204c616d70756e67223b706f7374616c5f636f64657c733a353a223435353631223b7374726565745f616464726573737c733a37373a224a6c2e204e61776177692047656c61722044616c6f6d2c2052616a6162617361204a6179612c2052616a61626173612c204b6f74612042616e646172204c616d70756e672c204c616d70756e67223b70686f6e657c733a31303a2230323332313233343536223b6661787c733a31303a2230323332313233343536223b656d61696c7c733a32353a22696e666f40736d616e396b756e696e67616e2e7363682e6964223b776562736974657c733a33313a22687474703a2f2f7777772e736d616e396b756e696e67616e2e7363682e6964223b6c6f676f7c733a383a226c6f676f2e706e67223b61646d697373696f6e5f7374617475737c733a343a226f70656e223b61646d697373696f6e5f796561727c733a343a2232303138223b61646d697373696f6e5f73746172745f646174657c733a31303a22323031382d31302d3138223b61646d697373696f6e5f656e645f646174657c733a31303a22323031382d31302d3237223b616e6e6f756e63656d656e745f73746172745f646174657c733a31303a22323031372d30312d3031223b616e6e6f756e63656d656e745f656e645f646174657c733a31303a22323031372d31322d3331223b61646d697373696f6e5f70686173655f69647c733a313a2231223b61646d697373696f6e5f70686173657c733a313a2231223b7468656d657c733a353a22636f736d6f223b),
-('d4toc9usn7e266t932ee89hfa1m74dac', '::1', 1540189412, 0x5f5f63695f6c6173745f726567656e65726174657c693a313534303138393335343b736974655f6d61696e74656e616e63657c733a353a2266616c7365223b736974655f6d61696e74656e616e63655f656e645f646174657c733a31303a22323031372d30312d3031223b736974655f63616368657c733a353a2266616c7365223b736974655f63616368655f74696d657c733a323a223130223b6d6574615f6465736372697074696f6e7c733a3130363a22434d532053656b6f6c61686b75206164616c616820436f6e74656e74204d616e6167656d656e742053797374656d2064616e2050504442204f6e6c696e652067726174697320756e74756b20534420534d502f5365646572616a617420534d412f5365646572616a6174223b6d6574615f6b6579776f7264737c733a3338313a22434d532c20576562736974652053656b6f6c6168204772617469732c2043617261204d656d6275617420576562736974652053656b6f6c61682c206d656d62756174207765622073656b6f6c61682c20636f6e746f6820776562736974652073656b6f6c61682c20666974757220776562736974652073656b6f6c61682c2053656b6f6c61682c20576562736974652c20496e7465726e65742c53697475732c20434d532053656b6f6c61682c205765622053656b6f6c61682c20576562736974652053656b6f6c6168204772617469732c20576562736974652053656b6f6c61682c2041706c696b6173692053656b6f6c61682c2050504442204f6e6c696e652c20505342204f6e6c696e652c20505342204f6e6c696e65204772617469732c2050656e6572696d61616e2053697377612042617275204f6e6c696e652c205261706f7274204f6e6c696e652c204b7572696b756c756d20323031332c2053442c20534d502c20534d412c20416c697961682c204d54732c20534d4b223b676f6f676c655f6d61705f6170695f6b65797c733a33393a2241497a615379446d69796346787a595a3337464f774134777153624c337a325976495949417277223b6c617469747564657c733a31303a222d362e32343037333131223b6c6f6e6769747564657c733a31313a223130362e39393732383932223b66617669636f6e7c733a31313a2266617669636f6e2e706e67223b6865616465727c733a33363a2230623064313066393834663536613664313937376334666639383963353938382e706e67223b7265636170746368615f736974655f6b65797c733a34303a22364c654e435441554141414141414454624c317244773847543144463244556a567445587a644d75223b74696d657a6f6e657c733a31323a22417369612f4a616b61727461223b66696c655f616c6c6f7765645f74797065737c733a31393a226a70672c206a7065672c20706e672c20676966223b75706c6f61645f6d61785f66696c6573697a657c733a313a2230223b73747564656e745f70686f746f5f6865696768747c733a333a22313730223b73747564656e745f70686f746f5f77696474687c733a333a22313133223b706f73745f7065725f706167657c733a323a223130223b706f73745f7273735f636f756e747c733a323a223130223b706f73745f72656c617465645f636f756e747c733a323a223130223b636f6d6d656e745f7065725f706167657c733a323a223130223b636f6d6d656e745f726567697374726174696f6e7c733a353a2266616c7365223b636f6d6d656e745f626c61636b6c6973747c733a373a226b616d70726574223b636f6d6d656e745f6f726465727c733a333a22617363223b66616365626f6f6b7c733a303a22223b747769747465727c733a303a22223b676f6f676c655f706c75737c733a303a22223b6c696e6b65645f696e7c733a303a22223b796f75747562657c733a303a22223b696e7374616772616d7c733a303a22223b6e70736e7c733a333a22313233223b7363686f6f6c5f6e616d657c733a31343a224d747320416c2d48696461796168223b686561646d61737465727c733a31323a22416e746f6e20536f6679616e223b686561646d61737465725f70686f746f7c733a32303a22686561646d61737465725f70686f746f2e706e67223b7363686f6f6c5f6c6576656c7c733a313a2232223b7363686f6f6c5f7374617475737c733a313a2231223b7461676c696e657c733a303a22223b72747c733a323a223132223b72777c733a323a223036223b7375625f76696c6c6167657c733a343a2257616765223b76696c6c6167657c733a383a224b61647567656465223b7375625f64697374726963747c733a383a224b61647567656465223b64697374726963747c733a31393a224b6f74612042616e646172204c616d70756e67223b706f7374616c5f636f64657c733a353a223435353631223b7374726565745f616464726573737c733a37373a224a6c2e204e61776177692047656c61722044616c6f6d2c2052616a6162617361204a6179612c2052616a61626173612c204b6f74612042616e646172204c616d70756e672c204c616d70756e67223b70686f6e657c733a31303a2230323332313233343536223b6661787c733a31303a2230323332313233343536223b656d61696c7c733a32353a22696e666f40736d616e396b756e696e67616e2e7363682e6964223b776562736974657c733a33313a22687474703a2f2f7777772e736d616e396b756e696e67616e2e7363682e6964223b6c6f676f7c733a383a226c6f676f2e706e67223b61646d697373696f6e5f7374617475737c733a343a226f70656e223b61646d697373696f6e5f796561727c733a343a2232303138223b61646d697373696f6e5f73746172745f646174657c733a31303a22323031382d31302d3138223b61646d697373696f6e5f656e645f646174657c733a31303a22323031382d31302d3237223b616e6e6f756e63656d656e745f73746172745f646174657c733a31303a22323031372d30312d3031223b616e6e6f756e63656d656e745f656e645f646174657c733a31303a22323031372d31322d3331223b61646d697373696f6e5f70686173655f69647c733a313a2231223b61646d697373696f6e5f70686173657c733a313a2231223b7468656d657c733a353a22636f736d6f223b69647c733a313a2231223b757365725f6e616d657c733a353a2241646d696e223b757365725f66756c6c5f6e616d657c733a353a2241646d696e223b757365725f656d61696c7c733a31343a2261646d696e406d61696c2e636f6d223b757365725f75726c7c4e3b757365725f726567697374657265647c733a31393a22323031382d31302d30392032303a34353a3331223b757365725f67726f75705f69647c733a313a2230223b757365725f747970657c733a31303a2273757065725f75736572223b70726f66696c655f69647c4e3b69735f6c6f676765645f696e7c623a313b757365725f70726976696c656765737c613a31343a7b693a303b733a393a2264617368626f617264223b693a313b733a31353a226368616e67655f70617373776f7264223b693a323b733a31313a226d61696e74656e616e6365223b693a333b733a333a2261636c223b693a343b733a393a2261646d697373696f6e223b693a353b733a31303a22617070656172616e6365223b693a363b733a343a22626c6f67223b693a373b733a393a22656d706c6f79656573223b693a383b733a353a226d65646961223b693a393b733a373a22706c7567696e73223b693a31303b733a393a227265666572656e6365223b693a31313b733a383a2273657474696e6773223b693a31323b733a383a2273747564656e7473223b693a31333b733a373a2270726f66696c65223b7d7468756d626e61696c5f73697a655f6865696768747c733a333a22313030223b7468756d626e61696c5f73697a655f77696474687c733a333a22313530223b6d656469756d5f73697a655f6865696768747c733a333a22333038223b6d656469756d5f73697a655f77696474687c733a333a22343630223b6c617267655f73697a655f6865696768747c733a333a22363030223b6c617267655f73697a655f77696474687c733a333a22383030223b616c62756d5f636f7665725f6865696768747c733a333a22323530223b616c62756d5f636f7665725f77696474687c733a333a22343030223b62616e6e65725f6865696768747c733a323a223831223b62616e6e65725f77696474687c733a333a22323435223b696d6167655f736c696465725f6865696768747c733a333a22343030223b696d6167655f736c696465725f77696474687c733a333a22393030223b656d706c6f7965655f70686f746f5f6865696768747c733a333a22313730223b656d706c6f7965655f70686f746f5f77696474687c733a333a22313133223b686561646d61737465725f70686f746f5f6865696768747c733a333a22313730223b686561646d61737465725f70686f746f5f77696474687c733a333a22313133223b6865616465725f6865696768747c733a323a223830223b6865616465725f77696474687c733a333a22323030223b6c6f676f5f6865696768747c733a333a22313230223b6c6f676f5f77696474687c733a333a22313230223b64656661756c745f706f73745f63617465676f72797c733a313a2231223b64656661756c745f706f73745f7374617475737c733a373a227075626c697368223b64656661756c745f706f73745f7669736962696c6974797c733a363a227075626c6963223b64656661756c745f706f73745f64697363757373696f6e7c733a343a226f70656e223b706f73745f696d6167655f7468756d626e61696c5f6865696768747c733a333a22313030223b706f73745f696d6167655f7468756d626e61696c5f77696474687c733a333a22313530223b706f73745f696d6167655f6d656469756d5f6865696768747c733a333a22323530223b706f73745f696d6167655f6d656469756d5f77696474687c733a333a22343030223b706f73745f696d6167655f6c617267655f6865696768747c733a333a22343530223b706f73745f696d6167655f6c617267655f77696474687c733a333a22383430223b636f6d6d656e745f6d6f6465726174696f6e7c733a353a2266616c7365223b73656e64677269645f757365726e616d657c733a303a22223b73656e64677269645f70617373776f72647c733a303a22223b73656e64677269645f6170695f6b65797c733a36393a2253472e7337614c476977725464695a6c4146724a4f425939512e6370676d765a5833625250377649786f71775553764d6c38733132394d41467a43794458694c77616e7373223b6f776e6572736869705f7374617475737c733a313a2231223b6465637265655f6f7065726174696e675f7065726d69747c733a313a222d223b6465637265655f6f7065726174696e675f7065726d69745f646174657c733a31303a22323031382d30342d3032223b);
+('d3db0fnbuvl28cl2fd8cdfnihb6eu89t', '::1', 1540440269, 0x5f5f63695f6c6173745f726567656e65726174657c693a313534303434303132393b736974655f6d61696e74656e616e63657c733a353a2266616c7365223b736974655f6d61696e74656e616e63655f656e645f646174657c733a31303a22323031372d30312d3031223b736974655f63616368657c733a353a2266616c7365223b736974655f63616368655f74696d657c733a323a223130223b6d6574615f6465736372697074696f6e7c733a3130363a22434d532053656b6f6c61686b75206164616c616820436f6e74656e74204d616e6167656d656e742053797374656d2064616e2050504442204f6e6c696e652067726174697320756e74756b20534420534d502f5365646572616a617420534d412f5365646572616a6174223b6d6574615f6b6579776f7264737c733a3338313a22434d532c20576562736974652053656b6f6c6168204772617469732c2043617261204d656d6275617420576562736974652053656b6f6c61682c206d656d62756174207765622073656b6f6c61682c20636f6e746f6820776562736974652073656b6f6c61682c20666974757220776562736974652073656b6f6c61682c2053656b6f6c61682c20576562736974652c20496e7465726e65742c53697475732c20434d532053656b6f6c61682c205765622053656b6f6c61682c20576562736974652053656b6f6c6168204772617469732c20576562736974652053656b6f6c61682c2041706c696b6173692053656b6f6c61682c2050504442204f6e6c696e652c20505342204f6e6c696e652c20505342204f6e6c696e65204772617469732c2050656e6572696d61616e2053697377612042617275204f6e6c696e652c205261706f7274204f6e6c696e652c204b7572696b756c756d20323031332c2053442c20534d502c20534d412c20416c697961682c204d54732c20534d4b223b676f6f676c655f6d61705f6170695f6b65797c733a33393a2241497a615379446d69796346787a595a3337464f774134777153624c337a325976495949417277223b6c617469747564657c733a31303a222d362e32343037333131223b6c6f6e6769747564657c733a31313a223130362e39393732383932223b66617669636f6e7c733a31313a2266617669636f6e2e706e67223b6865616465727c733a33363a2230623064313066393834663536613664313937376334666639383963353938382e706e67223b7265636170746368615f736974655f6b65797c733a34303a22364c654e435441554141414141414454624c317244773847543144463244556a567445587a644d75223b74696d657a6f6e657c733a31323a22417369612f4a616b61727461223b66696c655f616c6c6f7765645f74797065737c733a31393a226a70672c206a7065672c20706e672c20676966223b75706c6f61645f6d61785f66696c6573697a657c733a313a2230223b73747564656e745f70686f746f5f6865696768747c733a333a22313730223b73747564656e745f70686f746f5f77696474687c733a333a22313133223b706f73745f7065725f706167657c733a323a223130223b706f73745f7273735f636f756e747c733a323a223130223b706f73745f72656c617465645f636f756e747c733a323a223130223b636f6d6d656e745f7065725f706167657c733a323a223130223b636f6d6d656e745f726567697374726174696f6e7c733a353a2266616c7365223b636f6d6d656e745f626c61636b6c6973747c733a373a226b616d70726574223b636f6d6d656e745f6f726465727c733a333a22617363223b66616365626f6f6b7c733a303a22223b747769747465727c733a303a22223b676f6f676c655f706c75737c733a303a22223b6c696e6b65645f696e7c733a303a22223b796f75747562657c733a303a22223b696e7374616772616d7c733a303a22223b6e70736e7c733a333a22313233223b7363686f6f6c5f6e616d657c733a31343a224d747320416c2d48696461796168223b686561646d61737465727c733a31323a22416e746f6e20536f6679616e223b686561646d61737465725f70686f746f7c733a32303a22686561646d61737465725f70686f746f2e706e67223b7363686f6f6c5f6c6576656c7c733a313a2232223b7363686f6f6c5f7374617475737c733a313a2231223b7461676c696e657c733a303a22223b72747c733a323a223132223b72777c733a323a223036223b7375625f76696c6c6167657c733a343a2257616765223b76696c6c6167657c733a383a224b61647567656465223b7375625f64697374726963747c733a383a224b61647567656465223b64697374726963747c733a31393a224b6f74612042616e646172204c616d70756e67223b706f7374616c5f636f64657c733a353a223435353631223b7374726565745f616464726573737c733a37373a224a6c2e204e61776177692047656c61722044616c6f6d2c2052616a6162617361204a6179612c2052616a61626173612c204b6f74612042616e646172204c616d70756e672c204c616d70756e67223b70686f6e657c733a31303a2230323332313233343536223b6661787c733a31303a2230323332313233343536223b656d61696c7c733a32353a22696e666f40736d616e396b756e696e67616e2e7363682e6964223b776562736974657c733a33313a22687474703a2f2f7777772e736d616e396b756e696e67616e2e7363682e6964223b6c6f676f7c733a383a226c6f676f2e706e67223b61646d697373696f6e5f7374617475737c733a343a226f70656e223b61646d697373696f6e5f796561727c733a343a2232303138223b61646d697373696f6e5f73746172745f646174657c733a31303a22323031382d31302d3138223b61646d697373696f6e5f656e645f646174657c733a31303a22323031382d31302d3237223b616e6e6f756e63656d656e745f73746172745f646174657c733a31303a22323031372d30312d3031223b616e6e6f756e63656d656e745f656e645f646174657c733a31303a22323031372d31322d3331223b61646d697373696f6e5f70686173655f69647c733a313a2231223b61646d697373696f6e5f70686173657c733a313a2231223b7468656d657c733a353a22636f736d6f223b69647c733a313a2231223b757365725f6e616d657c733a353a2241646d696e223b757365725f66756c6c5f6e616d657c733a353a2241646d696e223b757365725f656d61696c7c733a31343a2261646d696e406d61696c2e636f6d223b757365725f75726c7c4e3b757365725f726567697374657265647c733a31393a22323031382d31302d30392032303a34353a3331223b757365725f67726f75705f69647c733a313a2230223b757365725f747970657c733a31303a2273757065725f75736572223b70726f66696c655f69647c4e3b69735f6c6f676765645f696e7c623a313b757365725f70726976696c656765737c613a31343a7b693a303b733a393a2264617368626f617264223b693a313b733a31353a226368616e67655f70617373776f7264223b693a323b733a31313a226d61696e74656e616e6365223b693a333b733a333a2261636c223b693a343b733a393a2261646d697373696f6e223b693a353b733a31303a22617070656172616e6365223b693a363b733a343a22626c6f67223b693a373b733a393a22656d706c6f79656573223b693a383b733a353a226d65646961223b693a393b733a373a22706c7567696e73223b693a31303b733a393a227265666572656e6365223b693a31313b733a383a2273657474696e6773223b693a31323b733a383a2273747564656e7473223b693a31333b733a373a2270726f66696c65223b7d7468756d626e61696c5f73697a655f6865696768747c733a333a22313030223b7468756d626e61696c5f73697a655f77696474687c733a333a22313530223b6d656469756d5f73697a655f6865696768747c733a333a22333038223b6d656469756d5f73697a655f77696474687c733a333a22343630223b6c617267655f73697a655f6865696768747c733a333a22363030223b6c617267655f73697a655f77696474687c733a333a22383030223b616c62756d5f636f7665725f6865696768747c733a333a22323530223b616c62756d5f636f7665725f77696474687c733a333a22343030223b62616e6e65725f6865696768747c733a323a223831223b62616e6e65725f77696474687c733a333a22323435223b696d6167655f736c696465725f6865696768747c733a333a22343030223b696d6167655f736c696465725f77696474687c733a333a22393030223b656d706c6f7965655f70686f746f5f6865696768747c733a333a22313730223b656d706c6f7965655f70686f746f5f77696474687c733a333a22313133223b686561646d61737465725f70686f746f5f6865696768747c733a333a22313730223b686561646d61737465725f70686f746f5f77696474687c733a333a22313133223b6865616465725f6865696768747c733a323a223830223b6865616465725f77696474687c733a333a22323030223b6c6f676f5f6865696768747c733a333a22313230223b6c6f676f5f77696474687c733a333a22313230223b64656661756c745f706f73745f63617465676f72797c733a313a2231223b64656661756c745f706f73745f7374617475737c733a373a227075626c697368223b64656661756c745f706f73745f7669736962696c6974797c733a363a227075626c6963223b64656661756c745f706f73745f64697363757373696f6e7c733a343a226f70656e223b706f73745f696d6167655f7468756d626e61696c5f6865696768747c733a333a22313030223b706f73745f696d6167655f7468756d626e61696c5f77696474687c733a333a22313530223b706f73745f696d6167655f6d656469756d5f6865696768747c733a333a22323530223b706f73745f696d6167655f6d656469756d5f77696474687c733a333a22343030223b706f73745f696d6167655f6c617267655f6865696768747c733a333a22343530223b706f73745f696d6167655f6c617267655f77696474687c733a333a22383430223b636f6d6d656e745f6d6f6465726174696f6e7c733a353a2266616c7365223b73656e64677269645f757365726e616d657c733a303a22223b73656e64677269645f70617373776f72647c733a303a22223b73656e64677269645f6170695f6b65797c733a36393a2253472e7337614c476977725464695a6c4146724a4f425939512e6370676d765a5833625250377649786f71775553764d6c38733132394d41467a43794458694c77616e7373223b6f776e6572736869705f7374617475737c733a313a2231223b6465637265655f6f7065726174696e675f7065726d69747c733a313a222d223b6465637265655f6f7065726174696e675f7065726d69745f646174657c733a31303a22323031382d30342d3032223b);
 
 --
 -- Indexes for dumped tables
@@ -1731,7 +1733,7 @@ ALTER TABLE `majors`
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `modules`
 --
@@ -1756,7 +1758,7 @@ ALTER TABLE `pollings`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `post_categories`
 --
@@ -1826,7 +1828,8 @@ ALTER TABLE `user_groups`
 -- AUTO_INCREMENT for table `user_privileges`
 --
 ALTER TABLE `user_privileges`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
