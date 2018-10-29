@@ -1,22 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
--- https://www.phpmyadmin.net/
+-- version 4.1.12
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2018 at 06:07 AM
--- Server version: 10.1.26-MariaDB
--- PHP Version: 7.1.8
+-- Generation Time: Oct 29, 2018 at 07:55 AM
+-- Server version: 5.6.16
+-- PHP Version: 5.5.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `db_cms_sekolahku`
@@ -28,8 +26,8 @@ SET time_zone = "+00:00";
 -- Table structure for table `academic_years`
 --
 
-CREATE TABLE `academic_years` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `academic_years` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `academic_year` varchar(9) NOT NULL COMMENT 'Tahun Akademik',
   `semester` enum('odd','even') NOT NULL DEFAULT 'odd' COMMENT 'odd = Ganjil, even = Genap',
   `is_active` enum('true','false') NOT NULL DEFAULT 'false',
@@ -41,8 +39,10 @@ CREATE TABLE `academic_years` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `academic_year` (`academic_year`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -50,8 +50,8 @@ CREATE TABLE `academic_years` (
 -- Table structure for table `achievements`
 --
 
-CREATE TABLE `achievements` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `achievements` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `student_id` bigint(20) NOT NULL DEFAULT '0',
   `description` varchar(255) NOT NULL,
   `type` bigint(20) NOT NULL DEFAULT '0',
@@ -66,8 +66,10 @@ CREATE TABLE `achievements` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  KEY `achievements_student_id__idx` (`student_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -75,8 +77,8 @@ CREATE TABLE `achievements` (
 -- Table structure for table `albums`
 --
 
-CREATE TABLE `albums` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `albums` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `album_title` varchar(255) NOT NULL,
   `album_description` varchar(255) DEFAULT NULL,
   `album_slug` varchar(255) DEFAULT NULL,
@@ -89,8 +91,17 @@ CREATE TABLE `albums` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `album_title` (`album_title`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `albums`
+--
+
+INSERT INTO `albums` (`id`, `album_title`, `album_description`, `album_slug`, `album_cover`, `created_at`, `updated_at`, `deleted_at`, `restored_at`, `created_by`, `updated_by`, `deleted_by`, `restored_by`, `is_deleted`) VALUES
+(1, 'Album Mts Al-Hidayah', '', 'album-mts-al-hidayah', NULL, '2018-10-25 10:15:13', '2018-10-28 13:39:56', '2018-10-25 10:19:24', '2018-10-28 13:59:03', 1, 1, 1, 1, 'false');
 
 -- --------------------------------------------------------
 
@@ -98,8 +109,8 @@ CREATE TABLE `albums` (
 -- Table structure for table `answers`
 --
 
-CREATE TABLE `answers` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `answers` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `question_id` bigint(20) DEFAULT '0',
   `answer` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -110,8 +121,11 @@ CREATE TABLE `answers` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_field` (`question_id`,`answer`),
+  KEY `answers_question_id__idx` (`question_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -119,8 +133,8 @@ CREATE TABLE `answers` (
 -- Table structure for table `banners`
 --
 
-CREATE TABLE `banners` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `banners` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `url` varchar(255) DEFAULT NULL,
   `target` enum('_blank','_self','_parent','_top') DEFAULT '_blank',
@@ -133,8 +147,10 @@ CREATE TABLE `banners` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `url` (`url`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `banners`
@@ -150,8 +166,8 @@ INSERT INTO `banners` (`id`, `title`, `url`, `target`, `image`, `created_at`, `u
 -- Table structure for table `class_groups`
 --
 
-CREATE TABLE `class_groups` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `class_groups` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `class` varchar(100) DEFAULT NULL,
   `sub_class` varchar(100) DEFAULT NULL,
   `major_id` bigint(20) DEFAULT '0',
@@ -163,8 +179,11 @@ CREATE TABLE `class_groups` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_field` (`class`,`sub_class`,`major_id`),
+  KEY `class_groups_major_id__idx` (`major_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -172,8 +191,8 @@ CREATE TABLE `class_groups` (
 -- Table structure for table `class_group_settings`
 --
 
-CREATE TABLE `class_group_settings` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `class_group_settings` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `academic_year_id` bigint(20) NOT NULL DEFAULT '0',
   `class_group_id` bigint(20) NOT NULL DEFAULT '0' COMMENT 'Kelas',
   `student_id` bigint(20) NOT NULL DEFAULT '0',
@@ -185,8 +204,13 @@ CREATE TABLE `class_group_settings` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_field` (`academic_year_id`,`student_id`),
+  KEY `class_group_settings_academic_year_id__idx` (`academic_year_id`) USING BTREE,
+  KEY `class_group_settings_class_group_id__idx` (`class_group_id`) USING BTREE,
+  KEY `class_group_settings_student_id__idx` (`student_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -194,8 +218,8 @@ CREATE TABLE `class_group_settings` (
 -- Table structure for table `comments`
 --
 
-CREATE TABLE `comments` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `comment_post_id` bigint(20) NOT NULL DEFAULT '0',
   `comment_author` varchar(255) NOT NULL,
   `comment_email` varchar(255) DEFAULT NULL,
@@ -216,8 +240,10 @@ CREATE TABLE `comments` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  KEY `comments_comment_post_id__idx` (`comment_post_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -225,8 +251,8 @@ CREATE TABLE `comments` (
 -- Table structure for table `employees`
 --
 
-CREATE TABLE `employees` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `employees` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `assignment_letter_number` varchar(255) DEFAULT NULL COMMENT 'Nomor Surat Tugas',
   `assignment_letter_date` date DEFAULT NULL COMMENT 'Tanggal Surat Tugas',
   `assignment_start_date` date DEFAULT NULL COMMENT 'TMT Tugas',
@@ -281,8 +307,21 @@ CREATE TABLE `employees` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nik` (`nik`),
+  UNIQUE KEY `nip` (`nip`),
+  UNIQUE KEY `npwp` (`npwp`),
+  UNIQUE KEY `niy` (`niy`),
+  UNIQUE KEY `email` (`email`),
+  KEY `employees_spouse_employment__idx` (`spouse_employment`) USING BTREE,
+  KEY `employees_employment_status__idx` (`employment_status`) USING BTREE,
+  KEY `employees_employment_type__idx` (`employment_type`) USING BTREE,
+  KEY `employees_institutions_lifter__idx` (`institutions_lifter`) USING BTREE,
+  KEY `employees_rank__idx` (`rank`) USING BTREE,
+  KEY `employees_salary_source__idx` (`salary_source`) USING BTREE,
+  KEY `employees_skills_laboratory__idx` (`skills_laboratory`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -290,8 +329,8 @@ CREATE TABLE `employees` (
 -- Table structure for table `files`
 --
 
-CREATE TABLE `files` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `files` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `file_title` varchar(255) DEFAULT NULL,
   `file_description` varchar(255) DEFAULT NULL,
   `file_name` varchar(255) DEFAULT NULL,
@@ -310,8 +349,10 @@ CREATE TABLE `files` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  KEY `files_file_category_id__idx` (`file_category_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -319,8 +360,8 @@ CREATE TABLE `files` (
 -- Table structure for table `file_categories`
 --
 
-CREATE TABLE `file_categories` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `file_categories` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `category` varchar(255) NOT NULL,
   `slug` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
@@ -332,8 +373,10 @@ CREATE TABLE `file_categories` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `category` (`category`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `file_categories`
@@ -348,8 +391,8 @@ INSERT INTO `file_categories` (`id`, `category`, `slug`, `description`, `created
 -- Table structure for table `image_sliders`
 --
 
-CREATE TABLE `image_sliders` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `image_sliders` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `caption` varchar(255) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -360,16 +403,19 @@ CREATE TABLE `image_sliders` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `image_sliders`
 --
 
 INSERT INTO `image_sliders` (`id`, `caption`, `image`, `created_at`, `updated_at`, `deleted_at`, `restored_at`, `created_by`, `updated_by`, `deleted_by`, `restored_by`, `is_deleted`) VALUES
-(1, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '1.png', '2018-04-02 01:52:03', NULL, '2018-10-22 05:08:31', NULL, NULL, NULL, 1, NULL, 'true'),
-(2, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '2.png', '2018-04-02 01:52:03', NULL, '2018-10-22 05:08:31', NULL, NULL, NULL, 1, NULL, 'true');
+(1, 'Kegiatan Sholat Dhuha dan Zuhur Berjamaah', '486bcda6a24f06af01371c21f79aa46c.jpg', '2018-04-02 01:52:03', '2018-10-25 09:42:39', '2018-10-28 13:52:29', '2018-10-29 06:52:16', NULL, 1, 1, 1, 'false'),
+(2, 'Lomba Olimpiade Matematika', 'b292aedf72a9f21c3da3ca9e57ba0148.jpg', '2018-04-02 01:52:03', '2018-10-25 09:48:11', '2018-10-28 13:52:29', '2018-10-29 06:52:16', NULL, 1, 1, 1, 'false'),
+(3, 'Kompetisi Sains Madrasah (KSM)', '3be7a33971202a9d91c64e9ca10033c8.jpg', '2018-10-25 09:55:06', NULL, '2018-10-28 13:52:29', '2018-10-29 06:52:16', 1, NULL, 1, 1, 'false'),
+(4, 'Kegiatan Sholat Dhuha dan Zuhur Berjamaah', '36d93c77e0b79586a01362351c1ed02c.jpg', '2018-10-28 13:53:14', NULL, NULL, NULL, 1, NULL, NULL, NULL, 'false');
 
 -- --------------------------------------------------------
 
@@ -377,8 +423,8 @@ INSERT INTO `image_sliders` (`id`, `caption`, `image`, `created_at`, `updated_at
 -- Table structure for table `links`
 --
 
-CREATE TABLE `links` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `links` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `url` varchar(255) DEFAULT NULL,
   `target` enum('_blank','_self','_parent','_top') DEFAULT '_blank',
@@ -390,8 +436,10 @@ CREATE TABLE `links` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `url` (`url`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `links`
@@ -406,10 +454,10 @@ INSERT INTO `links` (`id`, `title`, `url`, `target`, `created_at`, `updated_at`,
 -- Table structure for table `login_attempts`
 --
 
-CREATE TABLE `login_attempts` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `login_attempts` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `ip_address` varchar(45) NOT NULL,
-  `counter` int(11) UNSIGNED NOT NULL DEFAULT '1',
+  `counter` int(11) unsigned NOT NULL DEFAULT '1',
   `datetime` datetime DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -419,8 +467,9 @@ CREATE TABLE `login_attempts` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -428,8 +477,8 @@ CREATE TABLE `login_attempts` (
 -- Table structure for table `majors`
 --
 
-CREATE TABLE `majors` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `majors` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `major` varchar(255) DEFAULT NULL COMMENT 'Program Keahlian / Jurusan',
   `short_name` varchar(255) DEFAULT NULL COMMENT 'Nama Singkat',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -440,8 +489,10 @@ CREATE TABLE `majors` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `major` (`major`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -449,8 +500,8 @@ CREATE TABLE `majors` (
 -- Table structure for table `menus`
 --
 
-CREATE TABLE `menus` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `menus` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `menu_title` varchar(150) NOT NULL,
   `menu_url` varchar(150) NOT NULL,
   `menu_target` enum('_blank','_self','_parent','_top') DEFAULT '_self',
@@ -465,8 +516,9 @@ CREATE TABLE `menus` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `menus`
@@ -474,7 +526,7 @@ CREATE TABLE `menus` (
 
 INSERT INTO `menus` (`id`, `menu_title`, `menu_url`, `menu_target`, `menu_type`, `parent_id`, `position`, `created_at`, `updated_at`, `deleted_at`, `restored_at`, `created_by`, `updated_by`, `deleted_by`, `restored_by`, `is_deleted`) VALUES
 (1, 'Hubungi Kami', 'hubungi-kami', '_self', 'modules', 0, 5, '2018-04-02 01:52:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
-(2, 'Gallery Photo', 'gallery-photo', '_self', 'modules', 9, 1, '2018-04-02 01:52:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
+(2, 'Gallery Photo', 'gallery-photo', '', 'modules', 9, 1, '2018-04-02 01:52:04', '2018-10-25 10:13:18', NULL, '2018-10-25 10:13:18', NULL, 1, NULL, 1, 'false'),
 (3, 'Gallery Video', 'gallery-video', '_self', 'modules', 9, 2, '2018-04-02 01:52:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
 (4, 'Formulir PPDB', 'formulir-penerimaan-peserta-didik-baru', '_self', 'modules', 8, 1, '2018-04-02 01:52:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
 (5, 'Hasil Seleksi', 'hasil-seleksi-penerimaan-peserta-didik-baru', '_self', 'modules', 8, 2, '2018-04-02 01:52:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
@@ -493,8 +545,8 @@ INSERT INTO `menus` (`id`, `menu_title`, `menu_url`, `menu_target`, `menu_type`,
 -- Table structure for table `modules`
 --
 
-CREATE TABLE `modules` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `modules` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `module_name` varchar(255) NOT NULL,
   `module_description` varchar(255) DEFAULT NULL,
   `module_url` varchar(255) DEFAULT NULL,
@@ -507,8 +559,10 @@ CREATE TABLE `modules` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `module_name` (`module_name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `modules`
@@ -532,8 +586,8 @@ INSERT INTO `modules` (`id`, `module_name`, `module_description`, `module_url`, 
 -- Table structure for table `options`
 --
 
-CREATE TABLE `options` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `options` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `group` varchar(100) NOT NULL,
   `option` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -544,8 +598,10 @@ CREATE TABLE `options` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_field` (`group`,`option`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=170 ;
 
 --
 -- Dumping data for table `options`
@@ -728,8 +784,8 @@ INSERT INTO `options` (`id`, `group`, `option`, `created_at`, `updated_at`, `del
 -- Table structure for table `photos`
 --
 
-CREATE TABLE `photos` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `photos` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `photo_album_id` bigint(20) NOT NULL DEFAULT '0',
   `photo_name` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -740,8 +796,10 @@ CREATE TABLE `photos` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  KEY `photos_photo_album_id__idx` (`photo_album_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -749,8 +807,8 @@ CREATE TABLE `photos` (
 -- Table structure for table `pollings`
 --
 
-CREATE TABLE `pollings` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `pollings` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `answer_id` bigint(20) DEFAULT '0',
   `ip_address` varchar(45) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -761,8 +819,10 @@ CREATE TABLE `pollings` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  KEY `pollings_answer_id__idx` (`answer_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -770,8 +830,8 @@ CREATE TABLE `pollings` (
 -- Table structure for table `posts`
 --
 
-CREATE TABLE `posts` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `posts` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `post_title` varchar(255) DEFAULT NULL,
   `post_content` longtext,
   `post_image` varchar(100) DEFAULT NULL,
@@ -792,8 +852,10 @@ CREATE TABLE `posts` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  KEY `posts_post_author__idx` (`post_author`) USING BTREE
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `posts`
@@ -817,8 +879,8 @@ INSERT INTO `posts` (`id`, `post_title`, `post_content`, `post_image`, `post_aut
 -- Table structure for table `post_categories`
 --
 
-CREATE TABLE `post_categories` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `post_categories` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `category` varchar(255) NOT NULL,
   `slug` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
@@ -830,8 +892,10 @@ CREATE TABLE `post_categories` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_field` (`category`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `post_categories`
@@ -847,8 +911,8 @@ INSERT INTO `post_categories` (`id`, `category`, `slug`, `description`, `created
 -- Table structure for table `questions`
 --
 
-CREATE TABLE `questions` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `questions` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `question` varchar(255) DEFAULT NULL,
   `is_active` enum('true','false') DEFAULT 'false',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -859,8 +923,10 @@ CREATE TABLE `questions` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `question` (`question`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -868,8 +934,8 @@ CREATE TABLE `questions` (
 -- Table structure for table `quotes`
 --
 
-CREATE TABLE `quotes` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `quotes` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `quote` varchar(255) DEFAULT NULL,
   `quote_by` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -880,8 +946,10 @@ CREATE TABLE `quotes` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_field` (`quote`,`quote_by`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -889,8 +957,8 @@ CREATE TABLE `quotes` (
 -- Table structure for table `registration_phases`
 --
 
-CREATE TABLE `registration_phases` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `registration_phases` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `year` year(4) NOT NULL DEFAULT '0000' COMMENT 'Tahun PPDB',
   `phase` varchar(255) NOT NULL COMMENT 'Gelombang / Fase Pendaftaran',
   `start_date` date DEFAULT NULL COMMENT 'Tanggal Mulai',
@@ -903,8 +971,10 @@ CREATE TABLE `registration_phases` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_field` (`year`,`phase`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `registration_phases`
@@ -919,8 +989,8 @@ INSERT INTO `registration_phases` (`id`, `year`, `phase`, `start_date`, `end_dat
 -- Table structure for table `registration_quotas`
 --
 
-CREATE TABLE `registration_quotas` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `registration_quotas` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `year` year(4) NOT NULL DEFAULT '0000' COMMENT 'Tahun PPDB',
   `major_id` bigint(20) DEFAULT '0' COMMENT 'Program Keahlian',
   `quota` smallint(6) NOT NULL DEFAULT '0' COMMENT 'Kuota yang diterima secara keseluruhan',
@@ -932,8 +1002,11 @@ CREATE TABLE `registration_quotas` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_field` (`year`,`major_id`,`quota`),
+  KEY `registration_student_id__idx` (`major_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -941,8 +1014,8 @@ CREATE TABLE `registration_quotas` (
 -- Table structure for table `scholarships`
 --
 
-CREATE TABLE `scholarships` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `scholarships` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `student_id` bigint(20) NOT NULL DEFAULT '0',
   `type` bigint(20) NOT NULL DEFAULT '0',
   `description` varchar(255) NOT NULL,
@@ -956,8 +1029,10 @@ CREATE TABLE `scholarships` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  KEY `scholarships_student_id__idx` (`student_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -965,8 +1040,8 @@ CREATE TABLE `scholarships` (
 -- Table structure for table `settings`
 --
 
-CREATE TABLE `settings` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `settings` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `group` varchar(100) NOT NULL,
   `variable` varchar(255) DEFAULT NULL,
   `value` text,
@@ -981,8 +1056,10 @@ CREATE TABLE `settings` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_field` (`group`,`variable`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=95 ;
 
 --
 -- Dumping data for table `settings`
@@ -1063,7 +1140,7 @@ INSERT INTO `settings` (`id`, `group`, `variable`, `value`, `default`, `group_ac
 (72, 'school_profile', 'ownership_status', NULL, '1', 'administrator, super_user', 'Status Kepemilikan', '2018-04-02 01:51:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
 (73, 'school_profile', 'decree_operating_permit', NULL, '-', 'administrator, super_user', 'SK Izin Operasional', '2018-04-02 01:51:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
 (74, 'school_profile', 'decree_operating_permit_date', NULL, '2018-04-02', 'administrator, super_user', 'Tanggal SK Izin Operasional', '2018-04-02 01:51:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
-(75, 'school_profile', 'tagline', '', 'Where Tomorrow\'s Leaders Come Together', 'public, student, employee, administrator, super_user', 'Slogan', '2018-04-02 01:51:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
+(75, 'school_profile', 'tagline', '', 'Where Tomorrow''s Leaders Come Together', 'public, student, employee, administrator, super_user', 'Slogan', '2018-04-02 01:51:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
 (76, 'school_profile', 'rt', NULL, '12', 'public, student, employee, administrator, super_user', 'RT', '2018-04-02 01:51:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
 (77, 'school_profile', 'rw', NULL, '06', 'public, student, employee, administrator, super_user', 'RW', '2018-04-02 01:51:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
 (78, 'school_profile', 'sub_village', NULL, 'Wage', 'public, student, employee, administrator, super_user', 'Dusun', '2018-04-02 01:51:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false'),
@@ -1090,8 +1167,8 @@ INSERT INTO `settings` (`id`, `group`, `variable`, `value`, `default`, `group_ac
 -- Table structure for table `students`
 --
 
-CREATE TABLE `students` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `students` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `major_id` bigint(20) DEFAULT NULL COMMENT 'Jurusan / Program Keahlian',
   `first_choice` bigint(20) DEFAULT '0' COMMENT 'Pilihan Pertama PPDB',
   `second_choice` bigint(20) DEFAULT '0' COMMENT 'Pilihan Kedua PPDB',
@@ -1175,8 +1252,19 @@ CREATE TABLE `students` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nis` (`nis`),
+  UNIQUE KEY `nisn` (`nisn`),
+  UNIQUE KEY `nim` (`nim`),
+  UNIQUE KEY `email` (`email`),
+  KEY `students_registration_number__idx` (`registration_number`) USING BTREE,
+  KEY `students_full_name__idx` (`full_name`) USING BTREE,
+  KEY `students_first_choice__idx` (`first_choice`) USING BTREE,
+  KEY `students_second_choice__idx` (`second_choice`) USING BTREE,
+  KEY `students_major_id__idx` (`major_id`) USING BTREE,
+  KEY `students_admission_phase_id__idx` (`admission_phase_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1184,8 +1272,8 @@ CREATE TABLE `students` (
 -- Table structure for table `subscribers`
 --
 
-CREATE TABLE `subscribers` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `subscribers` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,
   `is_active` enum('true','false') DEFAULT 'false',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -1196,8 +1284,10 @@ CREATE TABLE `subscribers` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1205,8 +1295,8 @@ CREATE TABLE `subscribers` (
 -- Table structure for table `tags`
 --
 
-CREATE TABLE `tags` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `tags` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `tag` varchar(255) NOT NULL,
   `slug` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -1217,8 +1307,10 @@ CREATE TABLE `tags` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `tag` (`tag`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `tags`
@@ -1236,8 +1328,8 @@ INSERT INTO `tags` (`id`, `tag`, `slug`, `created_at`, `updated_at`, `deleted_at
 -- Table structure for table `themes`
 --
 
-CREATE TABLE `themes` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `themes` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `theme_name` varchar(255) NOT NULL,
   `theme_folder` varchar(255) DEFAULT NULL,
   `theme_author` varchar(255) DEFAULT NULL,
@@ -1250,8 +1342,10 @@ CREATE TABLE `themes` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `theme_name` (`theme_name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `themes`
@@ -1269,8 +1363,8 @@ INSERT INTO `themes` (`id`, `theme_name`, `theme_folder`, `theme_author`, `is_ac
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_name` varchar(60) NOT NULL,
   `user_password` varchar(100) NOT NULL,
   `user_full_name` varchar(100) DEFAULT NULL,
@@ -1280,7 +1374,7 @@ CREATE TABLE `users` (
   `user_registered` datetime DEFAULT NULL,
   `user_group_id` bigint(20) NOT NULL DEFAULT '0',
   `user_type` enum('super_user','administrator','employee','student') NOT NULL DEFAULT 'administrator',
-  `profile_id` bigint(20) UNSIGNED DEFAULT NULL COMMENT 'student_id OR employee_id',
+  `profile_id` bigint(20) unsigned DEFAULT NULL COMMENT 'student_id OR employee_id',
   `forgot_password_key` varchar(100) DEFAULT NULL,
   `forgot_password_request_date` date DEFAULT NULL,
   `is_active` enum('true','false') DEFAULT 'true',
@@ -1295,15 +1389,21 @@ CREATE TABLE `users` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_name` (`user_name`),
+  UNIQUE KEY `user_email` (`user_email`),
+  UNIQUE KEY `user_url` (`user_url`),
+  KEY `users_user_group_id__idx` (`user_group_id`) USING BTREE,
+  KEY `users_profile_id__idx` (`profile_id`) USING BTREE
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `user_name`, `user_password`, `user_full_name`, `user_email`, `user_url`, `biography`, `user_registered`, `user_group_id`, `user_type`, `profile_id`, `forgot_password_key`, `forgot_password_request_date`, `is_active`, `is_logged_in`, `last_logged_in`, `ip_address`, `created_at`, `updated_at`, `deleted_at`, `restored_at`, `created_by`, `updated_by`, `deleted_by`, `restored_by`, `is_deleted`) VALUES
-(1, 'Admin', '$2y$10$YaZadpEE8yiHVoWEz//Z1uxUGWGRLyOCb87mhdU8Hcn1EOzrQgZiO', 'Admin', 'admin@mail.com', NULL, NULL, '2018-10-09 20:45:31', 0, 'super_user', NULL, NULL, NULL, 'true', 'true', '2018-10-25 10:38:07', '::1', '2018-10-09 13:45:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false');
+(1, 'Admin', '$2y$10$YaZadpEE8yiHVoWEz//Z1uxUGWGRLyOCb87mhdU8Hcn1EOzrQgZiO', 'Admin', 'admin@mail.com', NULL, NULL, '2018-10-09 20:45:31', 0, 'super_user', NULL, NULL, NULL, 'true', 'true', '2018-10-29 13:51:14', '::1', '2018-10-09 13:45:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false');
 
 -- --------------------------------------------------------
 
@@ -1311,8 +1411,8 @@ INSERT INTO `users` (`id`, `user_name`, `user_password`, `user_full_name`, `user
 -- Table structure for table `user_groups`
 --
 
-CREATE TABLE `user_groups` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `user_groups` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `group` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -1322,8 +1422,10 @@ CREATE TABLE `user_groups` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `group` (`group`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1331,8 +1433,8 @@ CREATE TABLE `user_groups` (
 -- Table structure for table `user_privileges`
 --
 
-CREATE TABLE `user_privileges` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `user_privileges` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_group_id` bigint(20) NOT NULL,
   `module_id` bigint(20) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -1343,8 +1445,12 @@ CREATE TABLE `user_privileges` (
   `updated_by` bigint(20) DEFAULT NULL,
   `deleted_by` bigint(20) DEFAULT NULL,
   `restored_by` bigint(20) DEFAULT NULL,
-  `is_deleted` enum('true','false') DEFAULT 'false'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_deleted` enum('true','false') DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_field` (`user_group_id`,`module_id`),
+  KEY `user_privileges_user_group_id__idx` (`user_group_id`) USING BTREE,
+  KEY `user_privileges_module_id__idx` (`module_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -1352,11 +1458,12 @@ CREATE TABLE `user_privileges` (
 -- Table structure for table `_sessions`
 --
 
-CREATE TABLE `_sessions` (
+CREATE TABLE IF NOT EXISTS `_sessions` (
   `id` varchar(128) NOT NULL,
   `ip_address` varchar(45) NOT NULL,
-  `timestamp` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `data` blob NOT NULL
+  `timestamp` int(10) unsigned NOT NULL DEFAULT '0',
+  `data` blob NOT NULL,
+  KEY `ci_sessions_TIMESTAMP` (`timestamp`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1364,471 +1471,7 @@ CREATE TABLE `_sessions` (
 --
 
 INSERT INTO `_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
-('d3db0fnbuvl28cl2fd8cdfnihb6eu89t', '::1', 1540440269, 0x5f5f63695f6c6173745f726567656e65726174657c693a313534303434303132393b736974655f6d61696e74656e616e63657c733a353a2266616c7365223b736974655f6d61696e74656e616e63655f656e645f646174657c733a31303a22323031372d30312d3031223b736974655f63616368657c733a353a2266616c7365223b736974655f63616368655f74696d657c733a323a223130223b6d6574615f6465736372697074696f6e7c733a3130363a22434d532053656b6f6c61686b75206164616c616820436f6e74656e74204d616e6167656d656e742053797374656d2064616e2050504442204f6e6c696e652067726174697320756e74756b20534420534d502f5365646572616a617420534d412f5365646572616a6174223b6d6574615f6b6579776f7264737c733a3338313a22434d532c20576562736974652053656b6f6c6168204772617469732c2043617261204d656d6275617420576562736974652053656b6f6c61682c206d656d62756174207765622073656b6f6c61682c20636f6e746f6820776562736974652073656b6f6c61682c20666974757220776562736974652073656b6f6c61682c2053656b6f6c61682c20576562736974652c20496e7465726e65742c53697475732c20434d532053656b6f6c61682c205765622053656b6f6c61682c20576562736974652053656b6f6c6168204772617469732c20576562736974652053656b6f6c61682c2041706c696b6173692053656b6f6c61682c2050504442204f6e6c696e652c20505342204f6e6c696e652c20505342204f6e6c696e65204772617469732c2050656e6572696d61616e2053697377612042617275204f6e6c696e652c205261706f7274204f6e6c696e652c204b7572696b756c756d20323031332c2053442c20534d502c20534d412c20416c697961682c204d54732c20534d4b223b676f6f676c655f6d61705f6170695f6b65797c733a33393a2241497a615379446d69796346787a595a3337464f774134777153624c337a325976495949417277223b6c617469747564657c733a31303a222d362e32343037333131223b6c6f6e6769747564657c733a31313a223130362e39393732383932223b66617669636f6e7c733a31313a2266617669636f6e2e706e67223b6865616465727c733a33363a2230623064313066393834663536613664313937376334666639383963353938382e706e67223b7265636170746368615f736974655f6b65797c733a34303a22364c654e435441554141414141414454624c317244773847543144463244556a567445587a644d75223b74696d657a6f6e657c733a31323a22417369612f4a616b61727461223b66696c655f616c6c6f7765645f74797065737c733a31393a226a70672c206a7065672c20706e672c20676966223b75706c6f61645f6d61785f66696c6573697a657c733a313a2230223b73747564656e745f70686f746f5f6865696768747c733a333a22313730223b73747564656e745f70686f746f5f77696474687c733a333a22313133223b706f73745f7065725f706167657c733a323a223130223b706f73745f7273735f636f756e747c733a323a223130223b706f73745f72656c617465645f636f756e747c733a323a223130223b636f6d6d656e745f7065725f706167657c733a323a223130223b636f6d6d656e745f726567697374726174696f6e7c733a353a2266616c7365223b636f6d6d656e745f626c61636b6c6973747c733a373a226b616d70726574223b636f6d6d656e745f6f726465727c733a333a22617363223b66616365626f6f6b7c733a303a22223b747769747465727c733a303a22223b676f6f676c655f706c75737c733a303a22223b6c696e6b65645f696e7c733a303a22223b796f75747562657c733a303a22223b696e7374616772616d7c733a303a22223b6e70736e7c733a333a22313233223b7363686f6f6c5f6e616d657c733a31343a224d747320416c2d48696461796168223b686561646d61737465727c733a31323a22416e746f6e20536f6679616e223b686561646d61737465725f70686f746f7c733a32303a22686561646d61737465725f70686f746f2e706e67223b7363686f6f6c5f6c6576656c7c733a313a2232223b7363686f6f6c5f7374617475737c733a313a2231223b7461676c696e657c733a303a22223b72747c733a323a223132223b72777c733a323a223036223b7375625f76696c6c6167657c733a343a2257616765223b76696c6c6167657c733a383a224b61647567656465223b7375625f64697374726963747c733a383a224b61647567656465223b64697374726963747c733a31393a224b6f74612042616e646172204c616d70756e67223b706f7374616c5f636f64657c733a353a223435353631223b7374726565745f616464726573737c733a37373a224a6c2e204e61776177692047656c61722044616c6f6d2c2052616a6162617361204a6179612c2052616a61626173612c204b6f74612042616e646172204c616d70756e672c204c616d70756e67223b70686f6e657c733a31303a2230323332313233343536223b6661787c733a31303a2230323332313233343536223b656d61696c7c733a32353a22696e666f40736d616e396b756e696e67616e2e7363682e6964223b776562736974657c733a33313a22687474703a2f2f7777772e736d616e396b756e696e67616e2e7363682e6964223b6c6f676f7c733a383a226c6f676f2e706e67223b61646d697373696f6e5f7374617475737c733a343a226f70656e223b61646d697373696f6e5f796561727c733a343a2232303138223b61646d697373696f6e5f73746172745f646174657c733a31303a22323031382d31302d3138223b61646d697373696f6e5f656e645f646174657c733a31303a22323031382d31302d3237223b616e6e6f756e63656d656e745f73746172745f646174657c733a31303a22323031372d30312d3031223b616e6e6f756e63656d656e745f656e645f646174657c733a31303a22323031372d31322d3331223b61646d697373696f6e5f70686173655f69647c733a313a2231223b61646d697373696f6e5f70686173657c733a313a2231223b7468656d657c733a353a22636f736d6f223b69647c733a313a2231223b757365725f6e616d657c733a353a2241646d696e223b757365725f66756c6c5f6e616d657c733a353a2241646d696e223b757365725f656d61696c7c733a31343a2261646d696e406d61696c2e636f6d223b757365725f75726c7c4e3b757365725f726567697374657265647c733a31393a22323031382d31302d30392032303a34353a3331223b757365725f67726f75705f69647c733a313a2230223b757365725f747970657c733a31303a2273757065725f75736572223b70726f66696c655f69647c4e3b69735f6c6f676765645f696e7c623a313b757365725f70726976696c656765737c613a31343a7b693a303b733a393a2264617368626f617264223b693a313b733a31353a226368616e67655f70617373776f7264223b693a323b733a31313a226d61696e74656e616e6365223b693a333b733a333a2261636c223b693a343b733a393a2261646d697373696f6e223b693a353b733a31303a22617070656172616e6365223b693a363b733a343a22626c6f67223b693a373b733a393a22656d706c6f79656573223b693a383b733a353a226d65646961223b693a393b733a373a22706c7567696e73223b693a31303b733a393a227265666572656e6365223b693a31313b733a383a2273657474696e6773223b693a31323b733a383a2273747564656e7473223b693a31333b733a373a2270726f66696c65223b7d7468756d626e61696c5f73697a655f6865696768747c733a333a22313030223b7468756d626e61696c5f73697a655f77696474687c733a333a22313530223b6d656469756d5f73697a655f6865696768747c733a333a22333038223b6d656469756d5f73697a655f77696474687c733a333a22343630223b6c617267655f73697a655f6865696768747c733a333a22363030223b6c617267655f73697a655f77696474687c733a333a22383030223b616c62756d5f636f7665725f6865696768747c733a333a22323530223b616c62756d5f636f7665725f77696474687c733a333a22343030223b62616e6e65725f6865696768747c733a323a223831223b62616e6e65725f77696474687c733a333a22323435223b696d6167655f736c696465725f6865696768747c733a333a22343030223b696d6167655f736c696465725f77696474687c733a333a22393030223b656d706c6f7965655f70686f746f5f6865696768747c733a333a22313730223b656d706c6f7965655f70686f746f5f77696474687c733a333a22313133223b686561646d61737465725f70686f746f5f6865696768747c733a333a22313730223b686561646d61737465725f70686f746f5f77696474687c733a333a22313133223b6865616465725f6865696768747c733a323a223830223b6865616465725f77696474687c733a333a22323030223b6c6f676f5f6865696768747c733a333a22313230223b6c6f676f5f77696474687c733a333a22313230223b64656661756c745f706f73745f63617465676f72797c733a313a2231223b64656661756c745f706f73745f7374617475737c733a373a227075626c697368223b64656661756c745f706f73745f7669736962696c6974797c733a363a227075626c6963223b64656661756c745f706f73745f64697363757373696f6e7c733a343a226f70656e223b706f73745f696d6167655f7468756d626e61696c5f6865696768747c733a333a22313030223b706f73745f696d6167655f7468756d626e61696c5f77696474687c733a333a22313530223b706f73745f696d6167655f6d656469756d5f6865696768747c733a333a22323530223b706f73745f696d6167655f6d656469756d5f77696474687c733a333a22343030223b706f73745f696d6167655f6c617267655f6865696768747c733a333a22343530223b706f73745f696d6167655f6c617267655f77696474687c733a333a22383430223b636f6d6d656e745f6d6f6465726174696f6e7c733a353a2266616c7365223b73656e64677269645f757365726e616d657c733a303a22223b73656e64677269645f70617373776f72647c733a303a22223b73656e64677269645f6170695f6b65797c733a36393a2253472e7337614c476977725464695a6c4146724a4f425939512e6370676d765a5833625250377649786f71775553764d6c38733132394d41467a43794458694c77616e7373223b6f776e6572736869705f7374617475737c733a313a2231223b6465637265655f6f7065726174696e675f7065726d69747c733a313a222d223b6465637265655f6f7065726174696e675f7065726d69745f646174657c733a31303a22323031382d30342d3032223b);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `academic_years`
---
-ALTER TABLE `academic_years`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `academic_year` (`academic_year`);
-
---
--- Indexes for table `achievements`
---
-ALTER TABLE `achievements`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `achievements_student_id__idx` (`student_id`) USING BTREE;
-
---
--- Indexes for table `albums`
---
-ALTER TABLE `albums`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `album_title` (`album_title`);
-
---
--- Indexes for table `answers`
---
-ALTER TABLE `answers`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `unique_field` (`question_id`,`answer`),
-  ADD KEY `answers_question_id__idx` (`question_id`) USING BTREE;
-
---
--- Indexes for table `banners`
---
-ALTER TABLE `banners`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `url` (`url`);
-
---
--- Indexes for table `class_groups`
---
-ALTER TABLE `class_groups`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `unique_field` (`class`,`sub_class`,`major_id`),
-  ADD KEY `class_groups_major_id__idx` (`major_id`) USING BTREE;
-
---
--- Indexes for table `class_group_settings`
---
-ALTER TABLE `class_group_settings`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `unique_field` (`academic_year_id`,`student_id`),
-  ADD KEY `class_group_settings_academic_year_id__idx` (`academic_year_id`) USING BTREE,
-  ADD KEY `class_group_settings_class_group_id__idx` (`class_group_id`) USING BTREE,
-  ADD KEY `class_group_settings_student_id__idx` (`student_id`) USING BTREE;
-
---
--- Indexes for table `comments`
---
-ALTER TABLE `comments`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `comments_comment_post_id__idx` (`comment_post_id`) USING BTREE;
-
---
--- Indexes for table `employees`
---
-ALTER TABLE `employees`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nik` (`nik`),
-  ADD UNIQUE KEY `nip` (`nip`),
-  ADD UNIQUE KEY `npwp` (`npwp`),
-  ADD UNIQUE KEY `niy` (`niy`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD KEY `employees_spouse_employment__idx` (`spouse_employment`) USING BTREE,
-  ADD KEY `employees_employment_status__idx` (`employment_status`) USING BTREE,
-  ADD KEY `employees_employment_type__idx` (`employment_type`) USING BTREE,
-  ADD KEY `employees_institutions_lifter__idx` (`institutions_lifter`) USING BTREE,
-  ADD KEY `employees_rank__idx` (`rank`) USING BTREE,
-  ADD KEY `employees_salary_source__idx` (`salary_source`) USING BTREE,
-  ADD KEY `employees_skills_laboratory__idx` (`skills_laboratory`) USING BTREE;
-
---
--- Indexes for table `files`
---
-ALTER TABLE `files`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `files_file_category_id__idx` (`file_category_id`) USING BTREE;
-
---
--- Indexes for table `file_categories`
---
-ALTER TABLE `file_categories`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `category` (`category`);
-
---
--- Indexes for table `image_sliders`
---
-ALTER TABLE `image_sliders`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `links`
---
-ALTER TABLE `links`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `url` (`url`);
-
---
--- Indexes for table `login_attempts`
---
-ALTER TABLE `login_attempts`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `majors`
---
-ALTER TABLE `majors`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `major` (`major`);
-
---
--- Indexes for table `menus`
---
-ALTER TABLE `menus`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `modules`
---
-ALTER TABLE `modules`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `module_name` (`module_name`);
-
---
--- Indexes for table `options`
---
-ALTER TABLE `options`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `unique_field` (`group`,`option`);
-
---
--- Indexes for table `photos`
---
-ALTER TABLE `photos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `photos_photo_album_id__idx` (`photo_album_id`) USING BTREE;
-
---
--- Indexes for table `pollings`
---
-ALTER TABLE `pollings`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `pollings_answer_id__idx` (`answer_id`) USING BTREE;
-
---
--- Indexes for table `posts`
---
-ALTER TABLE `posts`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `posts_post_author__idx` (`post_author`) USING BTREE;
-
---
--- Indexes for table `post_categories`
---
-ALTER TABLE `post_categories`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `unique_field` (`category`);
-
---
--- Indexes for table `questions`
---
-ALTER TABLE `questions`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `question` (`question`);
-
---
--- Indexes for table `quotes`
---
-ALTER TABLE `quotes`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `unique_field` (`quote`,`quote_by`);
-
---
--- Indexes for table `registration_phases`
---
-ALTER TABLE `registration_phases`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `unique_field` (`year`,`phase`);
-
---
--- Indexes for table `registration_quotas`
---
-ALTER TABLE `registration_quotas`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `unique_field` (`year`,`major_id`,`quota`),
-  ADD KEY `registration_student_id__idx` (`major_id`) USING BTREE;
-
---
--- Indexes for table `scholarships`
---
-ALTER TABLE `scholarships`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `scholarships_student_id__idx` (`student_id`) USING BTREE;
-
---
--- Indexes for table `settings`
---
-ALTER TABLE `settings`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `unique_field` (`group`,`variable`);
-
---
--- Indexes for table `students`
---
-ALTER TABLE `students`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nis` (`nis`),
-  ADD UNIQUE KEY `nisn` (`nisn`),
-  ADD UNIQUE KEY `nim` (`nim`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD KEY `students_registration_number__idx` (`registration_number`) USING BTREE,
-  ADD KEY `students_full_name__idx` (`full_name`) USING BTREE,
-  ADD KEY `students_first_choice__idx` (`first_choice`) USING BTREE,
-  ADD KEY `students_second_choice__idx` (`second_choice`) USING BTREE,
-  ADD KEY `students_major_id__idx` (`major_id`) USING BTREE,
-  ADD KEY `students_admission_phase_id__idx` (`admission_phase_id`) USING BTREE;
-
---
--- Indexes for table `subscribers`
---
-ALTER TABLE `subscribers`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
-
---
--- Indexes for table `tags`
---
-ALTER TABLE `tags`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `tag` (`tag`);
-
---
--- Indexes for table `themes`
---
-ALTER TABLE `themes`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `theme_name` (`theme_name`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `user_name` (`user_name`),
-  ADD UNIQUE KEY `user_email` (`user_email`),
-  ADD UNIQUE KEY `user_url` (`user_url`),
-  ADD KEY `users_user_group_id__idx` (`user_group_id`) USING BTREE,
-  ADD KEY `users_profile_id__idx` (`profile_id`) USING BTREE;
-
---
--- Indexes for table `user_groups`
---
-ALTER TABLE `user_groups`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `group` (`group`);
-
---
--- Indexes for table `user_privileges`
---
-ALTER TABLE `user_privileges`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `unique_field` (`user_group_id`,`module_id`),
-  ADD KEY `user_privileges_user_group_id__idx` (`user_group_id`) USING BTREE,
-  ADD KEY `user_privileges_module_id__idx` (`module_id`) USING BTREE;
-
---
--- Indexes for table `_sessions`
---
-ALTER TABLE `_sessions`
-  ADD KEY `ci_sessions_TIMESTAMP` (`timestamp`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `academic_years`
---
-ALTER TABLE `academic_years`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `achievements`
---
-ALTER TABLE `achievements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `albums`
---
-ALTER TABLE `albums`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `answers`
---
-ALTER TABLE `answers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `banners`
---
-ALTER TABLE `banners`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `class_groups`
---
-ALTER TABLE `class_groups`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `class_group_settings`
---
-ALTER TABLE `class_group_settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `comments`
---
-ALTER TABLE `comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `employees`
---
-ALTER TABLE `employees`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `files`
---
-ALTER TABLE `files`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `file_categories`
---
-ALTER TABLE `file_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `image_sliders`
---
-ALTER TABLE `image_sliders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `links`
---
-ALTER TABLE `links`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `login_attempts`
---
-ALTER TABLE `login_attempts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `majors`
---
-ALTER TABLE `majors`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `menus`
---
-ALTER TABLE `menus`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
---
--- AUTO_INCREMENT for table `modules`
---
-ALTER TABLE `modules`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT for table `options`
---
-ALTER TABLE `options`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
---
--- AUTO_INCREMENT for table `photos`
---
-ALTER TABLE `photos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `pollings`
---
-ALTER TABLE `pollings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `posts`
---
-ALTER TABLE `posts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT for table `post_categories`
---
-ALTER TABLE `post_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `questions`
---
-ALTER TABLE `questions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `quotes`
---
-ALTER TABLE `quotes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `registration_phases`
---
-ALTER TABLE `registration_phases`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `registration_quotas`
---
-ALTER TABLE `registration_quotas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `scholarships`
---
-ALTER TABLE `scholarships`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `settings`
---
-ALTER TABLE `settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
---
--- AUTO_INCREMENT for table `students`
---
-ALTER TABLE `students`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `subscribers`
---
-ALTER TABLE `subscribers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tags`
---
-ALTER TABLE `tags`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT for table `themes`
---
-ALTER TABLE `themes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `user_groups`
---
-ALTER TABLE `user_groups`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `user_privileges`
---
-ALTER TABLE `user_privileges`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;COMMIT;
+('v6srfu3dn94f2s5urmrhbfh9mq75pr78', '::1', 1540796063, 0x5f5f63695f6c6173745f726567656e65726174657c693a313534303739353832313b736974655f6d61696e74656e616e63657c733a353a2266616c7365223b736974655f6d61696e74656e616e63655f656e645f646174657c733a31303a22323031372d30312d3031223b736974655f63616368657c733a353a2266616c7365223b736974655f63616368655f74696d657c733a323a223130223b6d6574615f6465736372697074696f6e7c733a3130363a22434d532053656b6f6c61686b75206164616c616820436f6e74656e74204d616e6167656d656e742053797374656d2064616e2050504442204f6e6c696e652067726174697320756e74756b20534420534d502f5365646572616a617420534d412f5365646572616a6174223b6d6574615f6b6579776f7264737c733a3338313a22434d532c20576562736974652053656b6f6c6168204772617469732c2043617261204d656d6275617420576562736974652053656b6f6c61682c206d656d62756174207765622073656b6f6c61682c20636f6e746f6820776562736974652073656b6f6c61682c20666974757220776562736974652073656b6f6c61682c2053656b6f6c61682c20576562736974652c20496e7465726e65742c53697475732c20434d532053656b6f6c61682c205765622053656b6f6c61682c20576562736974652053656b6f6c6168204772617469732c20576562736974652053656b6f6c61682c2041706c696b6173692053656b6f6c61682c2050504442204f6e6c696e652c20505342204f6e6c696e652c20505342204f6e6c696e65204772617469732c2050656e6572696d61616e2053697377612042617275204f6e6c696e652c205261706f7274204f6e6c696e652c204b7572696b756c756d20323031332c2053442c20534d502c20534d412c20416c697961682c204d54732c20534d4b223b676f6f676c655f6d61705f6170695f6b65797c733a33393a2241497a615379446d69796346787a595a3337464f774134777153624c337a325976495949417277223b6c617469747564657c733a31303a222d362e32343037333131223b6c6f6e6769747564657c733a31313a223130362e39393732383932223b66617669636f6e7c733a31313a2266617669636f6e2e706e67223b6865616465727c733a33363a2230623064313066393834663536613664313937376334666639383963353938382e706e67223b7265636170746368615f736974655f6b65797c733a34303a22364c654e435441554141414141414454624c317244773847543144463244556a567445587a644d75223b74696d657a6f6e657c733a31323a22417369612f4a616b61727461223b66696c655f616c6c6f7765645f74797065737c733a31393a226a70672c206a7065672c20706e672c20676966223b75706c6f61645f6d61785f66696c6573697a657c733a313a2230223b73747564656e745f70686f746f5f6865696768747c733a333a22313730223b73747564656e745f70686f746f5f77696474687c733a333a22313133223b706f73745f7065725f706167657c733a323a223130223b706f73745f7273735f636f756e747c733a323a223130223b706f73745f72656c617465645f636f756e747c733a323a223130223b636f6d6d656e745f7065725f706167657c733a323a223130223b636f6d6d656e745f726567697374726174696f6e7c733a353a2266616c7365223b636f6d6d656e745f626c61636b6c6973747c733a373a226b616d70726574223b636f6d6d656e745f6f726465727c733a333a22617363223b66616365626f6f6b7c733a303a22223b747769747465727c733a303a22223b676f6f676c655f706c75737c733a303a22223b6c696e6b65645f696e7c733a303a22223b796f75747562657c733a303a22223b696e7374616772616d7c733a303a22223b6e70736e7c733a333a22313233223b7363686f6f6c5f6e616d657c733a31343a224d747320416c2d48696461796168223b686561646d61737465727c733a31323a22416e746f6e20536f6679616e223b686561646d61737465725f70686f746f7c733a32303a22686561646d61737465725f70686f746f2e706e67223b7363686f6f6c5f6c6576656c7c733a313a2232223b7363686f6f6c5f7374617475737c733a313a2231223b7461676c696e657c733a303a22223b72747c733a323a223132223b72777c733a323a223036223b7375625f76696c6c6167657c733a343a2257616765223b76696c6c6167657c733a383a224b61647567656465223b7375625f64697374726963747c733a383a224b61647567656465223b64697374726963747c733a31393a224b6f74612042616e646172204c616d70756e67223b706f7374616c5f636f64657c733a353a223435353631223b7374726565745f616464726573737c733a37373a224a6c2e204e61776177692047656c61722044616c6f6d2c2052616a6162617361204a6179612c2052616a61626173612c204b6f74612042616e646172204c616d70756e672c204c616d70756e67223b70686f6e657c733a31303a2230323332313233343536223b6661787c733a31303a2230323332313233343536223b656d61696c7c733a32353a22696e666f40736d616e396b756e696e67616e2e7363682e6964223b776562736974657c733a33313a22687474703a2f2f7777772e736d616e396b756e696e67616e2e7363682e6964223b6c6f676f7c733a383a226c6f676f2e706e67223b61646d697373696f6e5f7374617475737c733a343a226f70656e223b61646d697373696f6e5f796561727c733a343a2232303138223b61646d697373696f6e5f73746172745f646174657c733a31303a22323031372d30312d3031223b61646d697373696f6e5f656e645f646174657c733a31303a22323031372d31322d3331223b616e6e6f756e63656d656e745f73746172745f646174657c733a31303a22323031372d30312d3031223b616e6e6f756e63656d656e745f656e645f646174657c733a31303a22323031372d31322d3331223b7468656d657c733a353a22636f736d6f223b69647c733a313a2231223b757365725f6e616d657c733a353a2241646d696e223b757365725f66756c6c5f6e616d657c733a353a2241646d696e223b757365725f656d61696c7c733a31343a2261646d696e406d61696c2e636f6d223b757365725f75726c7c4e3b757365725f726567697374657265647c733a31393a22323031382d31302d30392032303a34353a3331223b757365725f67726f75705f69647c733a313a2230223b757365725f747970657c733a31303a2273757065725f75736572223b70726f66696c655f69647c4e3b69735f6c6f676765645f696e7c623a313b757365725f70726976696c656765737c613a31343a7b693a303b733a393a2264617368626f617264223b693a313b733a31353a226368616e67655f70617373776f7264223b693a323b733a31313a226d61696e74656e616e6365223b693a333b733a333a2261636c223b693a343b733a393a2261646d697373696f6e223b693a353b733a31303a22617070656172616e6365223b693a363b733a343a22626c6f67223b693a373b733a393a22656d706c6f79656573223b693a383b733a353a226d65646961223b693a393b733a373a22706c7567696e73223b693a31303b733a393a227265666572656e6365223b693a31313b733a383a2273657474696e6773223b693a31323b733a383a2273747564656e7473223b693a31333b733a373a2270726f66696c65223b7d7468756d626e61696c5f73697a655f6865696768747c733a333a22313030223b7468756d626e61696c5f73697a655f77696474687c733a333a22313530223b6d656469756d5f73697a655f6865696768747c733a333a22333038223b6d656469756d5f73697a655f77696474687c733a333a22343630223b6c617267655f73697a655f6865696768747c733a333a22363030223b6c617267655f73697a655f77696474687c733a333a22383030223b616c62756d5f636f7665725f6865696768747c733a333a22323530223b616c62756d5f636f7665725f77696474687c733a333a22343030223b62616e6e65725f6865696768747c733a323a223831223b62616e6e65725f77696474687c733a333a22323435223b696d6167655f736c696465725f6865696768747c733a333a22343030223b696d6167655f736c696465725f77696474687c733a333a22393030223b656d706c6f7965655f70686f746f5f6865696768747c733a333a22313730223b656d706c6f7965655f70686f746f5f77696474687c733a333a22313133223b686561646d61737465725f70686f746f5f6865696768747c733a333a22313730223b686561646d61737465725f70686f746f5f77696474687c733a333a22313133223b6865616465725f6865696768747c733a323a223830223b6865616465725f77696474687c733a333a22323030223b6c6f676f5f6865696768747c733a333a22313230223b6c6f676f5f77696474687c733a333a22313230223b64656661756c745f706f73745f63617465676f72797c733a313a2231223b64656661756c745f706f73745f7374617475737c733a373a227075626c697368223b64656661756c745f706f73745f7669736962696c6974797c733a363a227075626c6963223b64656661756c745f706f73745f64697363757373696f6e7c733a343a226f70656e223b706f73745f696d6167655f7468756d626e61696c5f6865696768747c733a333a22313030223b706f73745f696d6167655f7468756d626e61696c5f77696474687c733a333a22313530223b706f73745f696d6167655f6d656469756d5f6865696768747c733a333a22323530223b706f73745f696d6167655f6d656469756d5f77696474687c733a333a22343030223b706f73745f696d6167655f6c617267655f6865696768747c733a333a22343530223b706f73745f696d6167655f6c617267655f77696474687c733a333a22383430223b636f6d6d656e745f6d6f6465726174696f6e7c733a353a2266616c7365223b73656e64677269645f757365726e616d657c733a303a22223b73656e64677269645f70617373776f72647c733a303a22223b73656e64677269645f6170695f6b65797c733a36393a2253472e7337614c476977725464695a6c4146724a4f425939512e6370676d765a5833625250377649786f71775553764d6c38733132394d41467a43794458694c77616e7373223b6f776e6572736869705f7374617475737c733a313a2231223b6465637265655f6f7065726174696e675f7065726d69747c733a313a222d223b6465637265655f6f7065726174696e675f7065726d69745f646174657c733a31303a22323031382d30342d3032223b);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
